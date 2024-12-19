@@ -1,11 +1,10 @@
 import './App.scss';
-import DisplayCountries from '../DisplayCountries';
+import Layout from '../Layout';
 
 function App() {
   return (
     <>
-      <h1>React App</h1>
-      <DisplayCountries/>
+      <Layout/>
     </>
   )
 }
