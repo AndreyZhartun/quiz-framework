@@ -1,0 +1,84 @@
+.d-flex {
+    display: flex;
+}
+
+.justify-content-center {
+    justify-content: center;
+}
+
+.align-items-center {
+    align-items: center;
+}
+
+/*
+ * Классы отступов с https://gist.github.com/jacurtis/30da4bf9a6c9b9b5cc0aebac512ca7c9?permalink_comment_id=4323531#gistcomment-4323531
+ */
+$spacings: (1, 2, 3, 4, 5, auto);
+
+$sides: (
+  "t": "top",
+  "b": "bottom",
+  "l": "left",
+  "r": "right",
+  "": (
+    "top",
+    "left",
+    "bottom",
+    "right"
+  ),
+  "x": (
+    "left",
+    "right"
+  ),
+  "y": (
+    "top",
+    "bottom"
+  )
+);
+
+$breakpoints: (
+  "": "",
+  "xs": 576px,
+  "sm": 768px,
+  "md": 992px,
+  "lg": 1200px,
+  "xl": 1400px
+);
+
+@each $breakName, $breakValue in $breakpoints {
+  @each $space in $spacings {
+    @each $prefix, $positions in $sides {
+      @if $breakName != "" {
+        $prefix: #{$prefix}-#{$breakName};
+      } @else {
+        $prefix: #{$prefix};
+      }
+
+      @if $breakName != "" {
+        @media (min-width: $breakValue) {
+          .p#{$prefix}-#{$space} {
+            @each $pos in $positions {
+              padding-#{$pos}: if($space == auto, $space, #{$space * 0.25}rem);
+            }
+          }
+          .m#{$prefix}-#{$space} {
+            @each $pos in $positions {
+              margin-#{$pos}: if($space == auto, $space, #{$space * 0.25}rem);
+            }
+          }
+        }
+      } @else {
+        .p#{$prefix}-#{$space} {
+          @each $pos in $positions {
+            padding-#{$pos}: if($space == auto, $space, #{$space * 0.25}rem);
+          }
+        }
+        .m#{$prefix}-#{$space} {
+          @each $pos in $positions {
+            margin-#{$pos}: if($space == auto, $space, #{$space * 0.25}rem);
+          }
+        }
+      }
+    }
+  }
+}
