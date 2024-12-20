@@ -10,4 +10,9 @@ export type AnswerOption = {
     label: string;
 }
 
+export type AnsweredQuestion = {
+    question: Question;
+    givenAnswerId: string;
+}
+
 export default Question;

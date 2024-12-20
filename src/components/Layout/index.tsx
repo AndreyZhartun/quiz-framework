@@ -1,4 +1,4 @@
-import GameContainer from "../GameContainer";
+import GameContainer from "../../features/quiz/containers/GameContainer";
 import Sidebar from "../Sidebar";
 import styles from "./Layout.module.scss";
 

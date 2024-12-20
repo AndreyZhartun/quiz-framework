@@ -6,12 +6,14 @@ const QuestionView: React.FC<QuestionViewProps> = ({
         title,
         answerOptions,
     },
+    processAnswer,
 }) => {
+
     return <div>
         <p>Вопрос №{number}</p>
         <p>{title}</p>
         {answerOptions.map(({id, label}) => 
-            <button key={id}>
+            <button key={id} onClick={() => processAnswer(id)}>
                 {label}
             </button>)}
     </div>

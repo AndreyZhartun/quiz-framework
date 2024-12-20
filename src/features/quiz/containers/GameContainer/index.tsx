@@ -1,8 +1,7 @@
 import React from "react";
 import { useQuery, gql } from '@apollo/client';
-import Country from "../../features/quiz/models/Country";
-import QuestionView from "../../features/quiz/components/QuestionView";
-import generateQuestion from "../../features/quiz/utils/generateQuestion";
+import Country from "../../models/Country";
+import Game from "../../components/Game";
 
 const GET_COUNTRIES = gql`
   query {
@@ -26,7 +25,7 @@ const GameContainer: React.FC = () => {
     loading,
     error,
   } = useQuery<CountriesQueryResult>(GET_COUNTRIES);
-
+  
   if (loading) { 
     return <p>Загрузка...</p>
   }
@@ -41,12 +40,8 @@ const GameContainer: React.FC = () => {
     </p>
   }
 
-  const question = generateQuestion(data.countries);
-
   return <>
-    <QuestionView
-      question={question}
-    />
+    <Game countries={data.countries}/>
   </>
 }
 
