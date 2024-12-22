@@ -1,15 +1,32 @@
 import { Card, Section, SectionCard } from "@blueprintjs/core";
 import { QuestionViewProps } from "./types";
 import styles from "./QuestionView.module.scss";
+import { useCallback, useContext } from "react";
+import GameContext from "../../context/gameContext";
+import { processAnswerAction } from "../../reducer/actions";
 
-const QuestionView: React.FC<QuestionViewProps> = ({
-    question: {
+const QuestionView: React.FC<QuestionViewProps> = () => {
+
+    const {
+        state: {
+            current,
+        },
+        dispatch,
+    } = useContext(GameContext);
+
+    const processQuestionAnswer = useCallback((answedId: string) => {
+        dispatch(processAnswerAction(answedId));
+    }, []);
+
+    if (!current) {
+        return <>Загрузка...</>
+    }
+
+    const {
         number,
         title,
         answerOptions,
-    },
-    processAnswer,
-}) => {
+    } = current;
 
     return <>
         <div className="d-flex mb-3">
@@ -22,7 +39,7 @@ const QuestionView: React.FC<QuestionViewProps> = ({
                 <Card 
                     key={id} 
                     interactive 
-                    onClick={() => processAnswer(id)}
+                    onClick={() => processQuestionAnswer(id)}
                     className={styles['container-button']}>
                     {label}
                 </Card>)}

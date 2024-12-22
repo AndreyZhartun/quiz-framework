@@ -1,19 +1,28 @@
 import Country from "../models/Country";
 import Question, { AnsweredQuestion } from '../models/Question';
 import generateQuestion from "../utils/generateQuestion";
-import { QuizActionTypes } from "./constants";
+import { GameStatuses, QuizActionTypes } from "./constants";
 
 export type QuizState = {
+    /** данные, по которым составляются вопросы */
+    data: Country[];
+    /** статус игры */
+    status: GameStatuses;
+    /** текущий вопрос */
     current: Question | null;
+    /** очередь следующих вопросов */
     queue: Question[];
+    /** список вопросов, на которые был дан ответ */
     answeredQuestions: AnsweredQuestion[];
 }
 
 export type QuizAction = {
-    type: QuizActionTypes.Init;
+    type: QuizActionTypes.LoadData;
     payload: {
         countries: Country[];
     }
+} | {
+    type: QuizActionTypes.StartGame;
 } | {
     type: QuizActionTypes.ProcessAnswer;
     payload: {
@@ -22,6 +31,8 @@ export type QuizAction = {
 }
 
 export const initialState: QuizState = {
+    data: [],
+    status: GameStatuses.Stopped,
     current: null,
     queue: [],
     answeredQuestions: [],
@@ -32,11 +43,17 @@ function quizReducer(
     action: QuizAction,
 ): QuizState {
     switch (action.type) {
-        case QuizActionTypes.Init:
+        case QuizActionTypes.LoadData:
             return {
-                current: generateQuestion(action.payload.countries),
-                queue: Array(4).fill(0).map(() => generateQuestion(action.payload.countries)),
-                answeredQuestions: [],
+                ...state,
+                data: action.payload.countries,
+            }
+        case QuizActionTypes.StartGame:
+            return {
+                ...state,
+                status: GameStatuses.Ongoing,
+                current: generateQuestion(state.data),
+                queue: Array(4).fill(0).map(() => generateQuestion(state.data)),
             }
         case QuizActionTypes.ProcessAnswer:
 
@@ -45,6 +62,7 @@ function quizReducer(
             }
 
             return {
+                ...state,
                 current: state.queue[0],
                 queue: [...state.queue.slice(1)],
                 answeredQuestions: [

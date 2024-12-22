@@ -1,47 +1,34 @@
-import { useCallback, useEffect, useReducer } from "react";
+import { useContext, useEffect } from "react";
 import { GameProps } from "./types";
-import quizReducer, { initialState } from "../../reducer/reducer";
-import { QuizActionTypes } from "../../reducer/constants";
+import { GameStatuses } from "../../reducer/constants";
 import QuestionView from "../QuestionView";
+import { loadDataAction } from "../../reducer/actions";
+import GameContext from "../../context/gameContext";
+import MainMenu from "../MainMenu";
 
 const Game: React.FC<GameProps> = ({
     countries,
 }) => {
 
-    const [state, dispatch] = useReducer(quizReducer, initialState)
+    const {
+        state,
+        dispatch,
+    } = useContext(GameContext);
 
     useEffect(() => {
-        dispatch({
-            type: QuizActionTypes.Init,
-            payload: {
-                countries,
-            }
-        })
+        dispatch(loadDataAction(countries));
     }, [dispatch, countries])
 
     const {
-        current,
-        queue,
+        status,
     } = state;
-
-    const processAnswer = useCallback((givenAnswerId: string) => {
-        dispatch({
-            type: QuizActionTypes.ProcessAnswer,
-            payload: {
-                givenAnswerId,
-            }
-        })
-    }, [])
-
-    if (!current) {
-        return <>Загрузка...</>
+    
+    if (status === GameStatuses.Stopped) {
+        return <MainMenu/>
     }
 
     return <div>
-        <QuestionView 
-            question={current}
-            processAnswer={processAnswer}
-        />
+        <QuestionView />
     </div>
 }
 
