@@ -7,29 +7,29 @@ import GameContext from "../../context/gameContext";
 import MainMenu from "../MainMenu";
 
 const Game: React.FC<GameProps> = ({
-    countries,
+  countries,
 }) => {
 
-    const {
-        state,
-        dispatch,
-    } = useContext(GameContext);
+  const {
+    state,
+    dispatch,
+  } = useContext(GameContext);
 
-    useEffect(() => {
-        dispatch(loadDataAction(countries));
-    }, [dispatch, countries])
+  useEffect(() => {
+    dispatch(loadDataAction(countries));
+  }, [dispatch, countries])
 
-    const {
-        status,
-    } = state;
-    
-    if (status === GameStatuses.Stopped) {
-        return <MainMenu/>
-    }
+  const {
+    status,
+  } = state;
+  
+  if (status === GameStatuses.Stopped) {
+    return <MainMenu/>
+  }
 
-    return <div>
-        <QuestionView />
-    </div>
+  return <div>
+    <QuestionView />
+  </div>
 }
 
 export default Game;

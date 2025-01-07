@@ -5,19 +5,19 @@ import { Card } from "@blueprintjs/core";
 
 const MainMenu = () => {
 
-    const {
-        dispatch,
-    } = useContext(GameContext);
+  const {
+    dispatch,
+  } = useContext(GameContext);
 
-    const startGame = useCallback(() => {
-      dispatch(startGameAction());
-    }, [dispatch])
+  const startGame = useCallback(() => {
+    dispatch(startGameAction());
+  }, [dispatch])
 
-    return <>
-        <Card interactive onClick={startGame}>
-            Начать игру
-        </Card>
-    </>
+  return <>
+    <Card interactive onClick={startGame}>
+      Начать игру
+    </Card>
+  </>
 }
 
 export default MainMenu;

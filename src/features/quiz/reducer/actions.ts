@@ -9,31 +9,31 @@ import { QuizActionTypes } from "./constants";
 export type MiddlewareLikeAction = (dispatch: React.Dispatch<QuizAction>) => void;
 
 export const loadDataAction = (
-    countries: Country[]
+  countries: Country[]
 ): MiddlewareLikeAction => (dispatch) => {
-    dispatch({
-        type: QuizActionTypes.LoadData,
-        payload: {
-            countries,
-        }
-    })
+  dispatch({
+    type: QuizActionTypes.LoadData,
+    payload: {
+      countries,
+    }
+  })
 }
 
 export const startGameAction = (
 
 ): MiddlewareLikeAction => dispatch => {
-    dispatch({
-        type: QuizActionTypes.StartGame,
-    })
+  dispatch({
+    type: QuizActionTypes.StartGame,
+  })
 }
 
 export const processAnswerAction = (
-    givenAnswerId: string,
+  givenAnswerId: string,
 ): MiddlewareLikeAction => dispatch => {
-    dispatch({
-        type: QuizActionTypes.ProcessAnswer,
-        payload: {
-            givenAnswerId,
-        }
-    })
+  dispatch({
+    type: QuizActionTypes.ProcessAnswer,
+    payload: {
+      givenAnswerId,
+    }
+  })
 }

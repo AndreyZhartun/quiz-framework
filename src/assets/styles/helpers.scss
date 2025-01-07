@@ -1,17 +1,19 @@
+@import "./variables.scss";
+
 .d-flex {
-    display: flex;
+  display: flex;
 }
 
 .justify-content-center {
-    justify-content: center;
+  justify-content: center;
 }
 
 .align-items-center {
-    align-items: center;
+  align-items: center;
 }
 
 /*
- * Классы отступов с https://gist.github.com/jacurtis/30da4bf9a6c9b9b5cc0aebac512ca7c9?permalink_comment_id=4323531#gistcomment-4323531
+ * Классы отступов взяты из https://gist.github.com/jacurtis/30da4bf9a6c9b9b5cc0aebac512ca7c9?permalink_comment_id=4323531#gistcomment-4323531
  */
 $spacings: (1, 2, 3, 4, 5, auto);
 
@@ -24,25 +26,16 @@ $sides: (
     "top",
     "left",
     "bottom",
-    "right"
+    "right",
   ),
   "x": (
     "left",
-    "right"
+    "right",
   ),
   "y": (
     "top",
-    "bottom"
+    "bottom",
   )
-);
-
-$breakpoints: (
-  "": "",
-  "xs": 576px,
-  "sm": 768px,
-  "md": 992px,
-  "lg": 1200px,
-  "xl": 1400px
 );
 
 @each $breakName, $breakValue in $breakpoints {

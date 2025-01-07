@@ -1,18 +1,18 @@
 type Question = {
-    number: number;
-    title: string;
-    answerOptions: AnswerOption[];
-    correctAnswerId: string;
+  number: number;
+  title: string;
+  answerOptions: AnswerOption[];
+  correctAnswerId: string;
 }
 
 export type AnswerOption = {
-    id: string;
-    label: string;
+  id: string;
+  label: string;
 }
 
 export type AnsweredQuestion = {
-    question: Question;
-    givenAnswerId: string;
+  question: Question;
+  givenAnswerId: string;
 }
 
 export default Question;
