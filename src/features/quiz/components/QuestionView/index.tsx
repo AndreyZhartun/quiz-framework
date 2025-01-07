@@ -1,4 +1,4 @@
-import { Card, Section, SectionCard } from "@blueprintjs/core";
+import { Callout, Card } from "@blueprintjs/core";
 import { QuestionViewProps } from "./types";
 import styles from "./QuestionView.module.scss";
 import { useCallback, useContext } from "react";
@@ -19,7 +19,9 @@ const QuestionView: React.FC<QuestionViewProps> = () => {
   }, []);
 
   if (!current) {
-    return <>Загрузка...</>
+    return <Callout intent="danger">
+      Ошибка загрузки вопроса
+    </Callout>
   }
 
   const {
@@ -31,7 +33,7 @@ const QuestionView: React.FC<QuestionViewProps> = () => {
   return <>
     <div className="d-flex mb-3">
       <Card className="mr-2">{number}</Card>
-      <Card>{title}</Card>
+      <Card className="flex-grow-1">{title}</Card>
     </div>
 
     <div className={styles['container']}>

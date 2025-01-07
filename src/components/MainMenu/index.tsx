@@ -1,4 +1,4 @@
-import { Section, SectionCard, Tag } from "@blueprintjs/core";
+import { Section, SectionCard } from "@blueprintjs/core";
 import GeoQuizMenu from "./GeoQuizMenu";
 import TechList from "./TechList";
 
@@ -9,7 +9,7 @@ const usedTechs = [
 ]
 
 const MainMenu: React.FC = () => {
-  return <Section title={"Географический квиз"} className="mr-2 mb-2">
+  return <Section title={"Квиз-Фреймворк"} className="mr-2 mb-2">
     <SectionCard>
       <div className="mb-1">Этот небольшой проект - фреймворк для игр-квизов</div>
       <TechList techs={usedTechs} className="mb-2"/>
