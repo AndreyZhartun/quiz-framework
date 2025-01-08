@@ -64,7 +64,7 @@ function quizReducer(
       return {
         ...state,
         current: state.queue[0],
-        queue: [...state.queue.slice(1)],
+        queue: [...state.queue.slice(1), generateQuestion(state.data)],
         answeredQuestions: [
           ...state.answeredQuestions,
           {

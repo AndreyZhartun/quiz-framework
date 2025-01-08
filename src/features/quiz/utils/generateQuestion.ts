@@ -53,9 +53,9 @@ const generateQuestion = (
   /**
    * Опции ответов
    */
-  const answerOptions: AnswerOption[] = optionIndexes.map(index => ({
-    id: index === correctOptionIndex ? correctOptionId : getUUID(),
-    label: countries[index].name,
+  const answerOptions: AnswerOption[] = optionIndexes.map(optionIndex => ({
+    id: optionIndex === correctOptionCountryIndex ? correctOptionId : getUUID(),
+    label: countries[optionIndex].name,
   }))
 
   return {
