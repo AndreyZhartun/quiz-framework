@@ -1,3 +1,4 @@
+import { GAME_QUESTION_LIMIT } from "../constants/globalConstants";
 import Country from "../features/quiz/models/Country";
 import Question, { AnsweredQuestion } from '../features/quiz/models/Question';
 import generateQuestion from "../features/quiz/utils/generateQuestion";
@@ -26,15 +27,17 @@ export type QuizAction = {
 } | {
   type: QuizActionTypes.StartGame;
 } | {
-  type: QuizActionTypes.ProcessAnswer;
+  type: QuizActionTypes.RecordAnswer;
   payload: {
     givenAnswerId: string;
   }
+} | {
+  type: QuizActionTypes.ProcessQuestionChange;
 }
 
 export const initialState: QuizState = {
   data: [],
-  status: GameStatuses.Stopped,
+  status: GameStatuses.Initial,
   current: null,
   queue: [],
   answeredQuestions: [],
@@ -70,7 +73,10 @@ function quizReducer(
         ...state,
         status: GameStatuses.Ongoing,
       }
-    case QuizActionTypes.ProcessAnswer:
+    /**
+     * Записать ответ пользователя на вопрос
+     */
+    case QuizActionTypes.RecordAnswer:
 
       if (!state.current) {
         return state;
@@ -78,8 +84,6 @@ function quizReducer(
 
       return {
         ...state,
-        current: state.queue[0],
-        queue: [...state.queue.slice(1), generateQuestion(state.data)],
         answeredQuestions: [
           ...state.answeredQuestions,
           {
@@ -87,6 +91,40 @@ function quizReducer(
             givenAnswerId: action.payload.givenAnswerId,
           },
         ]
+      }
+    /**
+     * Обработать изменение текущего вопроса
+     */
+    case QuizActionTypes.ProcessQuestionChange:
+
+      if (state.answeredQuestions.length + 1 === GAME_QUESTION_LIMIT) {
+        return {
+          ...state,
+          current: null,
+          status: GameStatuses.Finished,
+        }
+      }
+
+      /**
+       * Если в очереди нет вопросов, но игра еще не завершена, то показать ошибку в консоли,
+       * потому что такое состояние не должно возникать
+       */
+      if (!state.queue.length) {
+        console.error("В очереди вопросов пусто, но игра еще не завершена");
+        return state;
+      }
+
+      /**
+       * Нужно ли добавлять новые вопросы в очередь
+       */
+      const shouldRefillQueue = state.answeredQuestions.length + state.queue.length < GAME_QUESTION_LIMIT;
+
+      return {
+        ...state,
+        current: state.queue[0],
+        queue: shouldRefillQueue 
+          ? [...state.queue.slice(1), generateQuestion(state.data)] 
+          : state.queue.slice(1),
       }
     default:
       return state;

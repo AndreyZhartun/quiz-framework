@@ -34,10 +34,15 @@ export const startGameAction = (): MiddlewareLikeAction => dispatch => {
 export const processAnswerAction = (
   givenAnswerId: string,
 ): MiddlewareLikeAction => dispatch => {
+
   dispatch({
-    type: QuizActionTypes.ProcessAnswer,
+    type: QuizActionTypes.RecordAnswer,
     payload: {
       givenAnswerId,
     }
+  })
+
+  dispatch({
+    type: QuizActionTypes.ProcessQuestionChange,
   })
 }

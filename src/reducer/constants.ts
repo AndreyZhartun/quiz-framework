@@ -2,11 +2,13 @@ export enum QuizActionTypes {
   LoadData = "LOAD_DATA",
   GenerateStartingQuestions = "GENERATE_STARTING_QUESTIONS",
   StartGame = "START_GAME",
-  Init = "INIT",
+  RecordAnswer = "RECORD_ANSWER",
+  ProcessQuestionChange = "PROCESS_QUESTION_CHANGE",
   ProcessAnswer = "PROCESS_ANSWER",
 }
 
 export enum GameStatuses {
-  Stopped = "STOPPED",
+  Initial = "INITIAL",
   Ongoing = "ONGOING",
+  Finished = "FINISHED",
 }
