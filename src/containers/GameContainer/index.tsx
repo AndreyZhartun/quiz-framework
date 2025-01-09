@@ -1,13 +1,13 @@
 import React, { useContext } from "react";
-import Game from "../../components/Game";
-import MainMenu from "../../../../components/MainMenu";
+import Game from "../../features/quiz/components/Game";
+import MainMenu from "../../features/mainMenu/components/MainMenu";
 import GameContext from "../../context/gameContext";
-import StartGameButton from "../../components/StartGameButton";
+import StartGameButton from "../../features/mainMenu/components/StartGameButton";
 import { GameStatuses } from "../../reducer/constants";
-import ProgressMenu from "../../components/ProgressMenu";
+import ProgressMenu from "../../features/quiz/components/ProgressMenu";
 
 /**
- * 
+ * Контейнер-обертка всех состояний игры
  */
 const GameContainer: React.FC = () => {
 

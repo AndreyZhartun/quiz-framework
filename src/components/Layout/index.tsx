@@ -1,4 +1,4 @@
-import GameContainer from "../../features/quiz/containers/GameContainer";
+import GameContainer from "../../containers/GameContainer";
 import styles from "./Layout.module.scss";
 
 const Layout: React.FC = () => {

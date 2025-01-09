@@ -8,6 +8,9 @@ const usedTechs = [
   "Sass",
 ]
 
+/**
+ * Главное меню
+ */
 const MainMenu: React.FC = () => {
   return <Section title={"Квиз-Фреймворк"} className="mr-2 mb-2">
     <SectionCard>

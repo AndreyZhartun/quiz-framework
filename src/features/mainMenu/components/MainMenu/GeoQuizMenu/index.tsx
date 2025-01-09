@@ -1,10 +1,10 @@
 import { Card, Spinner } from "@blueprintjs/core";
 import TechList from "../TechList";
 import { gql, useQuery } from "@apollo/client";
-import Country from "../../../features/quiz/models/Country";
-import { useContext, useEffect } from "react";
-import { loadDataAction } from "../../../features/quiz/reducer/actions";
-import GameContext from "../../../features/quiz/context/gameContext";
+import Country from "../../../../quiz/models/Country";
+import { useEffect } from "react";
+import { generateStartingQuestions, loadDataAction } from "../../../../../reducer/actions";
+import useDispatch from "../../../../../hooks/useDispatch";
 
 const usedTechs = [
   "GraphQL",
@@ -31,9 +31,7 @@ type CountriesQueryResult = {
  */
 const GeoQuizMenu: React.FC = () => {
 
-  const {
-    dispatch,
-  } = useContext(GameContext);
+  const dispatch = useDispatch();
   
   const {
     data,
@@ -47,6 +45,7 @@ const GeoQuizMenu: React.FC = () => {
     }
 
     dispatch(loadDataAction(data.countries));
+    dispatch(generateStartingQuestions());
   }, [dispatch, data]);
 
   if (error) { 

@@ -1,13 +1,18 @@
 import { useCallback, useContext, useMemo } from "react";
-import GameContext from "../../context/gameContext";
-import { startGameAction } from "../../reducer/actions";
+import GameContext from "../../../../context/gameContext";
+import { startGameAction } from "../../../../reducer/actions";
 import { Card, CardProps } from "@blueprintjs/core";
+import useDispatch from "../../../../hooks/useDispatch";
 
+/**
+ * Кнопка начала игры
+ */
 const StartGameButton = () => {
+
+  const dispatch = useDispatch();
 
   const {
     state,
-    dispatch,
   } = useContext(GameContext);
 
   const {

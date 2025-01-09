@@ -7,6 +7,9 @@ export type GameContextType = {
   dispatch: (action: MiddlewareLikeAction) => void;
 }
 
+/**
+ * Контекст, содержащий всё глобальное состояние игры и функцию действия
+ */
 const GameContext = createContext<GameContextType>({
   state: initialState,
   dispatch: () => undefined,

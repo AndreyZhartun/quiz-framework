@@ -1,6 +1,6 @@
-import Country from "../models/Country";
-import Question, { AnsweredQuestion } from '../models/Question';
-import generateQuestion from "../utils/generateQuestion";
+import Country from "../features/quiz/models/Country";
+import Question, { AnsweredQuestion } from '../features/quiz/models/Question';
+import generateQuestion from "../features/quiz/utils/generateQuestion";
 import { GameStatuses, QuizActionTypes } from "./constants";
 
 export type QuizState = {
@@ -21,6 +21,8 @@ export type QuizAction = {
   payload: {
     countries: Country[];
   }
+} | {
+  type: QuizActionTypes.GenerateStartingQuestions;
 } | {
   type: QuizActionTypes.StartGame;
 } | {
@@ -43,17 +45,30 @@ function quizReducer(
   action: QuizAction,
 ): QuizState {
   switch (action.type) {
+    /**
+     * Загрузить данные в состояние reducer-а
+     */
     case QuizActionTypes.LoadData:
       return {
         ...state,
         data: action.payload.countries,
       }
+    /**
+     * Создать начальные вопросы
+     */
+    case QuizActionTypes.GenerateStartingQuestions:
+      return {
+        ...state,
+        current: generateQuestion(state.data),
+        queue: Array(4).fill(0).map(() => generateQuestion(state.data)),
+      }
+    /**
+     * Начать игру
+     */
     case QuizActionTypes.StartGame:
       return {
         ...state,
         status: GameStatuses.Ongoing,
-        current: generateQuestion(state.data),
-        queue: Array(4).fill(0).map(() => generateQuestion(state.data)),
       }
     case QuizActionTypes.ProcessAnswer:
 

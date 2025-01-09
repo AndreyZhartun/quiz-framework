@@ -2,16 +2,18 @@ import { Callout, Card } from "@blueprintjs/core";
 import { QuestionViewProps } from "./types";
 import styles from "./QuestionView.module.scss";
 import { useCallback, useContext } from "react";
-import GameContext from "../../context/gameContext";
-import { processAnswerAction } from "../../reducer/actions";
+import GameContext from "../../../../context/gameContext";
+import { processAnswerAction } from "../../../../reducer/actions";
+import useDispatch from "../../../../hooks/useDispatch";
 
 const QuestionView: React.FC<QuestionViewProps> = () => {
+
+  const dispatch = useDispatch();
 
   const {
     state: {
       current,
     },
-    dispatch,
   } = useContext(GameContext);
 
   const processQuestionAnswer = useCallback((answedId: string) => {

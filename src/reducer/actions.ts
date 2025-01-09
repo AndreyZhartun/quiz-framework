@@ -1,6 +1,6 @@
 import React from "react";
 import { QuizAction } from "./reducer";
-import Country from "../models/Country";
+import Country from "../features/quiz/models/Country";
 import { QuizActionTypes } from "./constants";
 
 /**
@@ -10,7 +10,7 @@ export type MiddlewareLikeAction = (dispatch: React.Dispatch<QuizAction>) => voi
 
 export const loadDataAction = (
   countries: Country[]
-): MiddlewareLikeAction => (dispatch) => {
+): MiddlewareLikeAction => dispatch => {
   dispatch({
     type: QuizActionTypes.LoadData,
     payload: {
@@ -19,9 +19,13 @@ export const loadDataAction = (
   })
 }
 
-export const startGameAction = (
+export const generateStartingQuestions = (): MiddlewareLikeAction => dispatch => {
+  dispatch({
+    type: QuizActionTypes.GenerateStartingQuestions,
+  })
+}
 
-): MiddlewareLikeAction => dispatch => {
+export const startGameAction = (): MiddlewareLikeAction => dispatch => {
   dispatch({
     type: QuizActionTypes.StartGame,
   })

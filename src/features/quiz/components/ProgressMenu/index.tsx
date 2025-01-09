@@ -1,5 +1,5 @@
 import { Section, SectionCard } from "@blueprintjs/core"
-import GameContext from "../../context/gameContext";
+import GameContext from "../../../../context/gameContext";
 import { useContext, useMemo } from "react";
 import { AnsweredQuestion } from "../../models/Question";
 import ProgressLevelBar from "./ProgressLevelBar";
@@ -35,7 +35,7 @@ const ProgressMenu = () => {
   }, [answeredQuestions])
   
   return (
-    <Section title="Игра в процессе">
+    <Section title="Игра в процессе" className="mb-2">
       <SectionCard>
         Игра
         {levelBars.map((level, index) => {

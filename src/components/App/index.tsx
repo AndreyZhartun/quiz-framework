@@ -1,8 +1,8 @@
 import Layout from '../Layout';
 import { useCallback, useMemo, useReducer } from 'react';
-import quizReducer, { initialState } from '../../features/quiz/reducer/reducer';
-import { MiddlewareLikeAction } from '../../features/quiz/reducer/actions';
-import GameContext, { GameContextType } from '../../features/quiz/context/gameContext';
+import quizReducer, { initialState } from '../../reducer/reducer';
+import { MiddlewareLikeAction } from '../../reducer/actions';
+import GameContext, { GameContextType } from '../../context/gameContext';
 
 function App() {
 
