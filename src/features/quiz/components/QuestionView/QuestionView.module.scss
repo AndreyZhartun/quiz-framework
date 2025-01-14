@@ -1,12 +1,7 @@
 .container {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 8px;
+  row-gap: 8px;
   width: 100%;
-
-  &-button {
-    flex-grow: 1;
-
-    & + & {
-      margin-left: 16px;
-    }
-  }
 }

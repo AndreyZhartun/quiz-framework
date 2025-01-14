@@ -12,3 +12,5 @@ export enum GameStatuses {
   Ongoing = "ONGOING",
   Finished = "FINISHED",
 }
+
+export type GameDataDictionary<T extends Record<string, string>> = Map<string, T>

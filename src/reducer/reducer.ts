@@ -2,11 +2,12 @@ import { GAME_QUESTION_LIMIT } from "../constants/globalConstants";
 import Country from "../features/quiz/models/Country";
 import Question, { AnsweredQuestion } from '../features/quiz/models/Question';
 import generateQuestion from "../features/quiz/utils/generateQuestion";
-import { GameStatuses, QuizActionTypes } from "./constants";
+import getGameDataDict from "../utils/getGameDataDict";
+import { GameDataDictionary, GameStatuses, QuizActionTypes } from "./constants";
 
 export type QuizState = {
-  /** данные, по которым составляются вопросы */
-  data: Country[];
+  /** данные, по которым составляются вопросы, в форме справочника */
+  dataDict: GameDataDictionary<Country>;
   /** статус игры */
   status: GameStatuses;
   /** текущий вопрос */
@@ -36,7 +37,7 @@ export type QuizAction = {
 }
 
 export const initialState: QuizState = {
-  data: [],
+  dataDict: new Map(),
   status: GameStatuses.Initial,
   current: null,
   queue: [],
@@ -54,7 +55,7 @@ function quizReducer(
     case QuizActionTypes.LoadData:
       return {
         ...state,
-        data: action.payload.countries,
+        dataDict: getGameDataDict(action.payload.countries),
       }
     /**
      * Создать начальные вопросы
@@ -62,8 +63,8 @@ function quizReducer(
     case QuizActionTypes.GenerateStartingQuestions:
       return {
         ...state,
-        current: generateQuestion(state.data),
-        queue: Array(4).fill(0).map(() => generateQuestion(state.data)),
+        current: generateQuestion(state.dataDict),
+        queue: Array(4).fill(0).map(() => generateQuestion(state.dataDict)),
       }
     /**
      * Начать игру
@@ -123,7 +124,7 @@ function quizReducer(
         ...state,
         current: state.queue[0],
         queue: shouldRefillQueue 
-          ? [...state.queue.slice(1), generateQuestion(state.data)] 
+          ? [...state.queue.slice(1), generateQuestion(state.dataDict)] 
           : state.queue.slice(1),
       }
     default:

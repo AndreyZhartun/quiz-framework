@@ -16,10 +16,10 @@ const StartGameButton = () => {
   } = useContext(GameContext);
 
   const {
-    data,
+    dataDict,
   } = state;
 
-  const canStart = !!data.length;
+  const canStart = !!dataDict.size;
 
   const startGame = useCallback(() => {
     dispatch(startGameAction());

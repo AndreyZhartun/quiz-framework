@@ -1,68 +1,82 @@
+import { GameDataDictionary } from "../../../reducer/constants";
 import getRandomInteger from "../../../utils/getRandomNumber";
 import getUUID from "../../../utils/getUUID";
 import shuffleArray from "../../../utils/shuffleArray";
-import Country from "../models/Country";
 import Question, { AnswerOption } from "../models/Question";
+import { QUESTION_ANSWER_OPTION_COUNT } from '../../../constants/globalConstants';
+import Country from '../models/Country';
 
 /**
- * Создать вопрос на основе списка стран
+ * Создать вопрос на основе справочника стран
  */
 const generateQuestion = (
-  countries: Country[],
+  dataDict: GameDataDictionary<Country>,
 ): Question => {
 
-  const countryIndexArray = Array(countries.length)
-    .fill(0)
-    .map((_, index) => index);
+  /**
+   * Перемешанный массив кодов стран
+   */
+  const shuffledCodes = shuffleArray([...dataDict.keys()]);
 
   /**
-   * Перемешанный массив индексов
+   * Коды стран, которые будут представлены в опциях ответов
    */
-  const shuffledArray = shuffleArray(countryIndexArray);
-
-  /**
-   * Количество опций ответов
-   */
-  const ANSWER_OPTION_COUNT = 2;
-
-  /**
-   * Индексы ответов
-   */
-  const optionIndexes = shuffledArray.slice(0, ANSWER_OPTION_COUNT);
+  const optionCodes = shuffledCodes.slice(0, QUESTION_ANSWER_OPTION_COUNT);
 
   /**
    * Случайно определить, какой из выбранных ответов будет правильным
    */
-  const correctOptionIndex = getRandomInteger(optionIndexes.length - 1);
-
-  /**
-   * Найти индекс страны правильного ответа
-   */
-  const correctOptionCountryIndex = optionIndexes[correctOptionIndex]
-
-  /**
-   * Объект страны для правильного ответа
-   */
-  const correctOptionCountry = countries[correctOptionCountryIndex]
+  const correctAnswerCode = optionCodes[getRandomInteger(optionCodes.length - 1)];
 
   /**
    * ID правильного ответа
    */
   const correctOptionId = getUUID();
+  
+  const {
+    questionLabelConstructor,
+    optionLabelConstructor,
+  } = getLabelConstructors();
 
   /**
    * Опции ответов
    */
-  const answerOptions: AnswerOption[] = optionIndexes.map(optionIndex => ({
-    id: optionIndex === correctOptionCountryIndex ? correctOptionId : getUUID(),
-    label: countries[optionIndex].name,
-  }))
+  const answerOptions: AnswerOption[] = optionCodes.map(code => {
+
+    const country = dataDict.get(code);
+
+    return ({
+      id: code === correctAnswerCode ? correctOptionId : getUUID(),
+      label: country ? optionLabelConstructor(country) : "Имя неизвестно",
+    });
+  })
+
+  const correctAnswerCountry = dataDict.get(correctAnswerCode);
 
   return {
-    number: 1,
-    title: `${correctOptionCountry.capital} - столица какой страны?`,
+    title: correctAnswerCountry ? questionLabelConstructor(correctAnswerCountry) : `Неизвестная ошибка`,
     answerOptions,
     correctAnswerId: correctOptionId,
+  }
+}
+
+/**
+ * Конструкторы надписей
+ */
+type LabelConstructors = {
+  questionLabelConstructor: (country: Country) => string;
+  optionLabelConstructor: (country: Country) => string;
+}
+
+/**
+ * Функция, которая возвращает объект с конструкторами надписей вопроса и ответов
+ */
+const getLabelConstructors = (
+
+): LabelConstructors => {
+  return {
+    questionLabelConstructor: ({capital}) => `${capital} - столица какой страны?`,
+    optionLabelConstructor: ({name}) => name,
   }
 }
 

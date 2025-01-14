@@ -1,5 +1,4 @@
 type Question = {
-  number: number;
   title: string;
   answerOptions: AnswerOption[];
   correctAnswerId: string;

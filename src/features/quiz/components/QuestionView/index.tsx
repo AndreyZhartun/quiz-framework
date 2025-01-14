@@ -27,14 +27,13 @@ const QuestionView: React.FC<QuestionViewProps> = () => {
   }
 
   const {
-    number,
     title,
     answerOptions,
   } = current;
 
   return <>
     <div className="d-flex mb-3">
-      <Card className="mr-2">{number}</Card>
+      <Card className="mr-2">?</Card>
       <Card className="flex-grow-1">{title}</Card>
     </div>
 
