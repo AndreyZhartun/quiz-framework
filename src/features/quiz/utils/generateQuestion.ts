@@ -5,6 +5,7 @@ import shuffleArray from "../../../utils/shuffleArray";
 import Question, { AnswerOption } from "../models/Question";
 import { QUESTION_ANSWER_OPTION_COUNT } from '../../../constants/globalConstants';
 import Country from '../models/Country';
+import { answerOptionWordings, QuestionTopics, questionWordings } from "./wordings";
 
 /**
  * Создать вопрос на основе справочника стран
@@ -12,6 +13,8 @@ import Country from '../models/Country';
 const generateQuestion = (
   dataDict: GameDataDictionary<Country>,
 ): Question => {
+
+  const topic = QuestionTopics.CapitalToCountry;
 
   /**
    * Перемешанный массив кодов стран
@@ -32,11 +35,6 @@ const generateQuestion = (
    * ID правильного ответа
    */
   const correctOptionId = getUUID();
-  
-  const {
-    questionLabelConstructor,
-    optionLabelConstructor,
-  } = getLabelConstructors();
 
   /**
    * Опции ответов
@@ -47,36 +45,17 @@ const generateQuestion = (
 
     return ({
       id: code === correctAnswerCode ? correctOptionId : getUUID(),
-      label: country ? optionLabelConstructor(country) : "Имя неизвестно",
+      // label: country ? optionLabelConstructor(country) : "Имя неизвестно",
+      label: answerOptionWordings[topic],
+      data: country || null,
     });
   })
 
-  const correctAnswerCountry = dataDict.get(correctAnswerCode);
-
   return {
-    title: correctAnswerCountry ? questionLabelConstructor(correctAnswerCountry) : `Неизвестная ошибка`,
+    // title: correctAnswerCountry ? questionLabelConstructor(correctAnswerCountry) : `Неизвестная ошибка`,
+    title: questionWordings[topic],
     answerOptions,
     correctAnswerId: correctOptionId,
-  }
-}
-
-/**
- * Конструкторы надписей
- */
-type LabelConstructors = {
-  questionLabelConstructor: (country: Country) => string;
-  optionLabelConstructor: (country: Country) => string;
-}
-
-/**
- * Функция, которая возвращает объект с конструкторами надписей вопроса и ответов
- */
-const getLabelConstructors = (
-
-): LabelConstructors => {
-  return {
-    questionLabelConstructor: ({capital}) => `${capital} - столица какой страны?`,
-    optionLabelConstructor: ({name}) => name,
   }
 }
 

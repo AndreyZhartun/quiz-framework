@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import Game from "../../features/quiz/components/Game";
+import GameInProgress from "../../features/quiz/components/Game";
 import MainMenu from "../../features/mainMenu/components/MainMenu";
 import GameContext from "../../context/gameContext";
 import StartGameButton from "../../features/mainMenu/components/StartGameButton";
@@ -30,7 +30,7 @@ const GameContainer: React.FC = () => {
     case GameStatuses.Ongoing:
       return <>
         <ProgressMenu/>
-        <Game/>
+        <GameInProgress/>
       </>
     case GameStatuses.Finished:
       return <>

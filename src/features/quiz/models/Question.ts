@@ -1,12 +1,15 @@
+import Wording from "./Wording";
+
 type Question = {
-  title: string;
+  title: Wording;
   answerOptions: AnswerOption[];
   correctAnswerId: string;
 }
 
 export type AnswerOption = {
   id: string;
-  label: string;
+  label: Wording;
+  data: Record<string, unknown> | null;
 }
 
 export type AnsweredQuestion = {
