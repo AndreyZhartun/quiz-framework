@@ -23,7 +23,7 @@ const QuestionAnswerOptionView: React.FC<QuestionAnswerOptionViewProps> = ({
   }, []);
 
   if (!data) {
-    return <>Ошибка</>
+    throw new Error("Ошибка варианта ответа вопроса");
   }
   
   return <Card 

@@ -17,8 +17,8 @@ const QuestionViewHeader = () => {
   const correctAnswerCountry = current?.answerOptions.find(({id}) => id === current.correctAnswerId)?.data;
 
   if (!current || !correctAnswerCountry) {
-    // TODO бросать ошибки
-    return <>Ошибка</>
+
+    throw new Error("Ошибка заголовка вопроса");
   }
   
   return <div className="d-flex mb-3">

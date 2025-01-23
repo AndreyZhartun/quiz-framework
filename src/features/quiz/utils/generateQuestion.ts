@@ -5,7 +5,7 @@ import shuffleArray from "../../../utils/shuffleArray";
 import Question, { AnswerOption } from "../models/Question";
 import { QUESTION_ANSWER_OPTION_COUNT } from '../../../constants/globalConstants';
 import Country from '../models/Country';
-import { answerOptionWordings, QuestionTopics, questionWordings } from "./wordings";
+import { allTopics, answerOptionWordings, questionWordings } from "./wordings";
 
 /**
  * Создать вопрос на основе справочника стран
@@ -14,7 +14,10 @@ const generateQuestion = (
   dataDict: GameDataDictionary<Country>,
 ): Question => {
 
-  const topic = QuestionTopics.CapitalToCountry;
+  /**
+   * Случайно определить тему вопроса
+   */
+  const topic = allTopics[getRandomInteger(allTopics.length - 1)];
 
   /**
    * Перемешанный массив кодов стран
@@ -45,14 +48,12 @@ const generateQuestion = (
 
     return ({
       id: code === correctAnswerCode ? correctOptionId : getUUID(),
-      // label: country ? optionLabelConstructor(country) : "Имя неизвестно",
       label: answerOptionWordings[topic],
       data: country || null,
     });
   })
 
   return {
-    // title: correctAnswerCountry ? questionLabelConstructor(correctAnswerCountry) : `Неизвестная ошибка`,
     title: questionWordings[topic],
     answerOptions,
     correctAnswerId: correctOptionId,

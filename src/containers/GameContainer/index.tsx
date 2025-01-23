@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import GameInProgress from "../../features/quiz/components/Game";
+import GameInProgress from "../../features/quiz/components/GameInProgress";
 import MainMenu from "../../features/mainMenu/components/MainMenu";
 import GameContext from "../../context/gameContext";
 import StartGameButton from "../../features/mainMenu/components/StartGameButton";
