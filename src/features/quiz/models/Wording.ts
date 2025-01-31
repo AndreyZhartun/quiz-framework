@@ -1,4 +1,7 @@
 
+/**
+ * Формулировка
+ */
 type Wording = WordingItem[];
 
 type WordingItem = {

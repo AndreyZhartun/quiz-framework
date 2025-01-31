@@ -1,11 +1,11 @@
 import { Section, SectionCard } from "@blueprintjs/core"
 import GameContext from "../../../../context/gameContext";
 import { useContext, useMemo } from "react";
-import { AnsweredQuestion } from "../../models/Question";
 import ProgressLevelBar from "./ProgressLevelBar";
+import splitArrayEqually from "../../../../utils/splitArrayEqually";
 
 /**
- * 
+ * Прогресс квиза
  */
 const ProgressMenu = () => {
 
@@ -18,20 +18,7 @@ const ProgressMenu = () => {
   } = state;
 
   const levelBars = useMemo(() => {
-    let startSliceIndex = 0;
-
-    const output: (AnsweredQuestion[])[] = [];
-
-    while (answeredQuestions[startSliceIndex]) {
-
-      output.push(
-        answeredQuestions.slice(startSliceIndex, startSliceIndex + 5),
-      )
-
-      startSliceIndex += 5;
-    }
-
-    return output;
+    return splitArrayEqually(answeredQuestions, 5);
   }, [answeredQuestions])
   
   return (
