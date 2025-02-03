@@ -54,6 +54,7 @@ const generateQuestion = (
   })
 
   return {
+    id: getUUID(),
     title: questionWordings[topic],
     answerOptions,
     correctAnswerId: correctOptionId,

@@ -1,6 +1,7 @@
 import Wording from "./Wording";
 
 type Question = {
+  id: string;
   title: Wording;
   answerOptions: AnswerOption[];
   correctAnswerId: string;

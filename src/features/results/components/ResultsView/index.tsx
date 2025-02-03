@@ -1,35 +1,23 @@
-import { Callout, Section, SectionCard } from "@blueprintjs/core"
-import { useContext } from "react";
-import GameContext from "../../../../context/gameContext";
-import styles from "./ResultsView.module.scss";
+import { Section, SectionCard } from "@blueprintjs/core"
+import { useState } from "react";
+import QuestionGrid from "../../../quiz/components/QuestionGrid";
+import AnsweredQuestionView from "./AnsweredQuestionView";
 
 /**
  * Отображение результатов
  */
 const ResultsView = () => {
 
-  const {
-    state: {
-      answeredQuestions,
-    },
-  } = useContext(GameContext);
+  const [activeId, setActiveId] = useState<string | null>(null);
   
   return (
     <>
       <Section title={"Квиз закончен"}>
         <SectionCard>
-          <div className={styles["grid"]}>
-            {answeredQuestions.map((answer, index) => {
-
-              const intent = answer.givenAnswerId === answer.question.correctAnswerId
-                ? "success" 
-                : "danger";
-
-              return <Callout key={answer.givenAnswerId} intent={intent} compact>
-                {index + 1}
-              </Callout>
-            })}
-          </div>
+          <QuestionGrid
+            onClick={setActiveId}
+          />
+          {activeId && <AnsweredQuestionView id={activeId}/>}
         </SectionCard>
       </Section>
     </>
