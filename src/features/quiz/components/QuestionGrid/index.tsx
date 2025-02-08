@@ -72,7 +72,8 @@ const QuestionGrid: React.FC<QuestionGridProps> = ({
           onClick={onClick ? () => onClick(id) : undefined}
           interactive={!!onClick}
           minimal
-          active={id === activeId}>
+          active={id === activeId}
+          className={styles["grid-card"]}>
           <div className={styles["grid-card-text"]}>{index + 1}</div>
         </Tag>
       })}

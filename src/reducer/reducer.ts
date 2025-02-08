@@ -98,7 +98,10 @@ function quizReducer(
      */
     case QuizActionTypes.ProcessQuestionChange:
 
-      if (state.answeredQuestions.length + 1 === GAME_QUESTION_LIMIT) {
+      /**
+       * Завершить игру, если количество отвеченных вопросов достигло лимита
+       */
+      if (state.answeredQuestions.length === GAME_QUESTION_LIMIT) {
         return {
           ...state,
           current: null,
