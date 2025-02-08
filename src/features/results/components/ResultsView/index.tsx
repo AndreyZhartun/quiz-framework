@@ -16,6 +16,7 @@ const ResultsView = () => {
         <SectionCard>
           <QuestionGrid
             onClick={setActiveId}
+            activeId={activeId}
           />
           {activeId && <AnsweredQuestionView id={activeId}/>}
         </SectionCard>
