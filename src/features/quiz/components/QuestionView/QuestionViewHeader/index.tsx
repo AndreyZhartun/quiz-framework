@@ -21,8 +21,7 @@ const QuestionViewHeader = () => {
     throw new Error("Ошибка заголовка вопроса");
   }
   
-  return <div className="d-flex mb-3">
-    <Card className="mr-2">?</Card>
+  return <div className="d-flex mb-2">
     <Card className="flex-grow-1">
       <WordingView wording={current.title} data={correctAnswerCountry}/>
     </Card>

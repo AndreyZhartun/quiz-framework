@@ -10,7 +10,7 @@ type Question = {
 export type AnswerOption = {
   id: string;
   label: Wording;
-  data: Record<string, unknown> | null;
+  data: Record<string, unknown>;
 }
 
 export type AnsweredQuestion = {

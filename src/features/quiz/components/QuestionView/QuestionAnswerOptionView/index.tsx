@@ -21,10 +21,6 @@ const QuestionAnswerOptionView: React.FC<QuestionAnswerOptionViewProps> = ({
   const processQuestionAnswer = useCallback((answedId: string) => {
     dispatch(processAnswerAction(answedId));
   }, []);
-
-  if (!data) {
-    throw new Error("Ошибка варианта ответа вопроса");
-  }
   
   return <Card 
     key={id} 

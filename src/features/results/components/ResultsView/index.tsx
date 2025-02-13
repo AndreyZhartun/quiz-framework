@@ -14,6 +14,7 @@ const ResultsView = () => {
     <>
       <Section title={"Квиз закончен"}>
         <SectionCard>
+          <div className="mb-2">Нажмите на номер вопроса, чтобы узнать подробности</div>
           <QuestionGrid
             onClick={setActiveId}
             activeId={activeId}

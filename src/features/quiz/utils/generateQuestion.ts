@@ -49,7 +49,8 @@ const generateQuestion = (
     return ({
       id: code === correctAnswerCode ? correctOptionId : getUUID(),
       label: answerOptionWordings[topic],
-      data: country || null,
+      /** data для code всегда будет существовать, потому что code берется напрямую из ключей dataDict */
+      data: country as Country,
     });
   })
 
