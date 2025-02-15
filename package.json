@@ -10,7 +10,6 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@apollo/client": "^3.12.3",
     "@blueprintjs/core": "^5.16.2",
     "classnames": "^2.5.1",
     "graphql": "^16.10.0",
