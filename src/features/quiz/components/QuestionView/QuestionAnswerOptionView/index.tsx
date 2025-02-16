@@ -20,12 +20,14 @@ const QuestionAnswerOptionView: React.FC<QuestionAnswerOptionViewProps> = ({
   
   const processQuestionAnswer = useCallback((answedId: string) => {
     dispatch(processAnswerAction(answedId));
-  }, []);
+  }, [dispatch]);
   
   return <Card 
     key={id} 
     interactive 
-    onClick={() => processQuestionAnswer(id)}>
+    onClick={() => {
+      processQuestionAnswer(id);
+    }}>
     <WordingView wording={label} data={data}/>
   </Card>
 }

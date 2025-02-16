@@ -16,7 +16,7 @@ const WordingView: React.FC<WordingViewProps> = ({
         case "raw":
           return <React.Fragment key={index}>{content}</React.Fragment>
         case "field": 
-          return <React.Fragment key={index}>{String(data[content]) ?? "-"}</React.Fragment>
+          return <React.Fragment key={index}>{String(data[content]) || "-"}</React.Fragment>
         default:
           return <React.Fragment key={index}>{"{Неизвестный фрагмент}"}</React.Fragment>
       }

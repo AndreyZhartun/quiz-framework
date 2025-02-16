@@ -1,5 +1,4 @@
 import { GAME_QUESTION_LIMIT } from "../constants/globalConstants";
-import Country from "../features/quiz/models/Country";
 import Question, { AnsweredQuestion } from '../features/quiz/models/Question';
 import generateMultipleQuestions from "../features/quiz/utils/generateMultipleQuestions";
 import generateQuestion from "../features/quiz/utils/generateQuestion";
@@ -23,7 +22,7 @@ export type QuizState = {
 export type QuizAction = {
   type: QuizActionTypes.LoadData;
   payload: {
-    countries: Country[];
+    data: Record<string, string>[];
   }
 } | {
   type: QuizActionTypes.GenerateStartingQuestions;
@@ -61,7 +60,10 @@ function quizReducer(
     case QuizActionTypes.LoadData:
       return {
         ...state,
-        dataDict: getGameDataDict(action.payload.countries),
+        dataDict: getGameDataDict({
+          config: state.config,
+          rawData: action.payload.data,
+        }),
       }
     /**
      * Создать начальные вопросы
@@ -112,7 +114,7 @@ function quizReducer(
     /**
      * Обработать изменение текущего вопроса
      */
-    case QuizActionTypes.ProcessQuestionChange:
+    case QuizActionTypes.ProcessQuestionChange: {
 
       /**
        * Завершить игру, если количество отвеченных вопросов достигло лимита
@@ -146,6 +148,7 @@ function quizReducer(
           ? [...state.queue.slice(1), generateQuestion({config: state.config, dataDict: state.dataDict})] 
           : state.queue.slice(1),
       }
+    }
     default:
       return state;
   }

@@ -1,5 +1,4 @@
 import { SupportedDataConfigs } from "../../../reducer/constants";
-import Country from "../../quiz/models/Country";
 import { useEffect, useState } from "react";
 
 /**
@@ -13,7 +12,7 @@ const useDataFetch = (config: SupportedDataConfigs) => {
     processResponse,
   } = dataFetchConfigs[config];
 
-  const [data, setData] = useState<Country[]>([])
+  const [data, setData] = useState<Record<string, string>[]>([])
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null)
 
@@ -26,9 +25,9 @@ const useDataFetch = (config: SupportedDataConfigs) => {
         setData(processResponse(res));
         setLoading(false);
       })  
-      .catch(err => {
+      .catch((err: unknown) => {
         console.log(err);
-        setError(err);
+        setError(String(err));
         setLoading(false);
       })
   }, [endpoint, params, processResponse])
@@ -46,7 +45,7 @@ const useDataFetch = (config: SupportedDataConfigs) => {
 type FetchParams = {
   endpoint: string;
   params: RequestInit;
-  processResponse: (response: any) => Country[],
+  processResponse: (response: any) => Record<string, string>[],
 }
 
 /**
@@ -60,7 +59,14 @@ const dataFetchConfigs: Record<SupportedDataConfigs, FetchParams> = {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ query: '{ countries { code, name, capital, emoji } }' }),
     },
-    processResponse: response => response.data.countries,
+    processResponse: response => {
+
+      if (!response?.data?.countries) {
+        return [];
+      }
+
+      return response.data.countries as Record<string, string>[];
+    },
   }
 }
 

@@ -49,7 +49,7 @@ const DataLoadMenu: React.FC<DataLoadMenuProps> = ({
       <h3 className="mb-1">{title}</h3>
       <div className={classNames("mb-3", styles['desc'])}>
         <TechList techs={techs}/>
-        <a href={linkHref} target="_blank" rel="noopener" className="mt-1 mt-xs-0 ml-0 ml-xs-1">
+        <a href={linkHref} target="_blank" rel="noreferrer" className="mt-1 mt-xs-0 ml-0 ml-xs-1">
           {linkLabel}
         </a>
       </div>

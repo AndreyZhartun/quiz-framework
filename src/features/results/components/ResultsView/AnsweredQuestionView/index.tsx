@@ -19,7 +19,7 @@ const AnsweredQuestionView: React.FC<AnsweredQuestionViewProps> = ({
 
   const activeAnsweredQuestion = useMemo(() => {
     return answeredQuestions.find(({question}) => question.id === id) || null;
-  }, [id])
+  }, [answeredQuestions, id])
 
   if (!activeAnsweredQuestion) {
     return null;

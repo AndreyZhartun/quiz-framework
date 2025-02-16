@@ -1,5 +1,4 @@
 import { Callout } from "@blueprintjs/core";
-import { QuestionViewProps } from "./types";
 import styles from "./QuestionView.module.scss";
 import { useContext } from "react";
 import GameContext from "../../../../context/gameContext";
@@ -9,7 +8,7 @@ import QuestionAnswerOptionView from "./QuestionAnswerOptionView";
 /**
  * Отображение текущего вопроса с вариантами ответов
  */
-const QuestionView: React.FC<QuestionViewProps> = () => {
+const QuestionView: React.FC = () => {
 
   const {
     state: {

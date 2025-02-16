@@ -1,13 +1,10 @@
-import { GameProps } from "./types";
 import QuestionView from "../QuestionView";
 import GameErrorBoundary from "./GameErrorBoundary";
 
 /**
  * Контейнер игры в процессе
  */
-const GameInProgress: React.FC<GameProps> = ({
-  
-}) => {
+const GameInProgress: React.FC = () => {
   return <GameErrorBoundary>
     <QuestionView />
   </GameErrorBoundary>

@@ -79,7 +79,11 @@ const QuestionGrid: React.FC<QuestionGridProps> = ({
           large
           icon={isMobile ? undefined : tileIcons[type]} 
           intent={type} 
-          onClick={onClick ? () => onClick(id) : undefined}
+          onClick={onClick 
+            ? () => {
+                onClick(id);
+              }
+            : undefined}
           interactive={!!onClick}
           minimal
           active={id === activeId}
