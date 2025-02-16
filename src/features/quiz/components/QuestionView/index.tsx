@@ -6,6 +6,9 @@ import GameContext from "../../../../context/gameContext";
 import QuestionViewHeader from "./QuestionViewHeader";
 import QuestionAnswerOptionView from "./QuestionAnswerOptionView";
 
+/**
+ * Отображение текущего вопроса с вариантами ответов
+ */
 const QuestionView: React.FC<QuestionViewProps> = () => {
 
   const {
@@ -30,6 +33,7 @@ const QuestionView: React.FC<QuestionViewProps> = () => {
     <div className={styles['container']}>
       {answerOptions.map(ao => 
         <QuestionAnswerOptionView 
+          key={ao.id}
           answerOption={ao}
         />)}
     </div>

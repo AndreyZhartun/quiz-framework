@@ -6,7 +6,7 @@ import { QuestionGridProps, QuestionGridTile, QuestionGridTileType } from './typ
 import { GameStatuses } from '../../../../reducer/constants';
 
 /**
- * Сетка-история вопросов
+ * Сетка вопросов, показывает прошлый, текущий и будущие вопросы
  */
 const QuestionGrid: React.FC<QuestionGridProps> = ({
   onClick,
@@ -22,6 +22,9 @@ const QuestionGrid: React.FC<QuestionGridProps> = ({
     },
   } = useContext(GameContext);
 
+  /**
+   * Тайлы сетки
+   */
   const tiles = useMemo<QuestionGridTile[]>(() => {
 
     const output: QuestionGridTile[] = answeredQuestions.map(({question, givenAnswerId}) => ({
@@ -59,7 +62,7 @@ const QuestionGrid: React.FC<QuestionGridProps> = ({
     }
 
     return output;
-  }, [status, answeredQuestions, current]);
+  }, [status, answeredQuestions, current, queue]);
   
   return (
     <div className={styles["grid"]}>

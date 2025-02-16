@@ -1,5 +1,5 @@
+import { SupportedDataConfigs } from "../../../../../reducer/constants";
 import DataLoadMenu from "../DataLoadMenu";
-import { SupportedDataConfigs } from "../DataLoadMenu/types";
 
 /**
  * Меню выбора квиза по географии

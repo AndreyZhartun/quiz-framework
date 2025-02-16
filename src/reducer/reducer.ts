@@ -1,13 +1,15 @@
 import { GAME_QUESTION_LIMIT } from "../constants/globalConstants";
 import Country from "../features/quiz/models/Country";
 import Question, { AnsweredQuestion } from '../features/quiz/models/Question';
+import generateMultipleQuestions from "../features/quiz/utils/generateMultipleQuestions";
 import generateQuestion from "../features/quiz/utils/generateQuestion";
 import getGameDataDict from "../utils/getGameDataDict";
-import { GameDataDictionary, GameStatuses, QuizActionTypes } from "./constants";
+import { GameDataDictionary, GameStatuses, QuizActionTypes, SupportedDataConfigs } from "./constants";
 
 export type QuizState = {
+  config: SupportedDataConfigs;
   /** данные, по которым составляются вопросы, в форме справочника */
-  dataDict: GameDataDictionary<Country>;
+  dataDict: GameDataDictionary<Record<string, string>>;
   /** статус игры */
   status: GameStatuses;
   /** текущий вопрос */
@@ -37,6 +39,7 @@ export type QuizAction = {
 }
 
 export const initialState: QuizState = {
+  config: SupportedDataConfigs.Geography,
   dataDict: new Map(),
   status: GameStatuses.Initial,
   current: null,
@@ -44,6 +47,9 @@ export const initialState: QuizState = {
   answeredQuestions: [],
 }
 
+/**
+ * Главный и единственный обработчик изменений глобального состояния
+ */
 function quizReducer(
   state: QuizState,
   action: QuizAction,
@@ -60,12 +66,22 @@ function quizReducer(
     /**
      * Создать начальные вопросы
      */
-    case QuizActionTypes.GenerateStartingQuestions:
+    case QuizActionTypes.GenerateStartingQuestions: {
+
+      const [current, ...queue] = generateMultipleQuestions({
+        count: 5,
+        generateParams: {
+          config: state.config,
+          dataDict: state.dataDict,
+        },
+      })
+
       return {
         ...state,
-        current: generateQuestion(state.dataDict),
-        queue: Array(4).fill(0).map(() => generateQuestion(state.dataDict)),
+        current,
+        queue,
       }
+    }
     /**
      * Начать игру
      */
@@ -127,7 +143,7 @@ function quizReducer(
         ...state,
         current: state.queue[0],
         queue: shouldRefillQueue 
-          ? [...state.queue.slice(1), generateQuestion(state.dataDict)] 
+          ? [...state.queue.slice(1), generateQuestion({config: state.config, dataDict: state.dataDict})] 
           : state.queue.slice(1),
       }
     default:

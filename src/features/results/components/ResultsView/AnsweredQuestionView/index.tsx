@@ -52,8 +52,8 @@ const AnsweredQuestionView: React.FC<AnsweredQuestionViewProps> = ({
         {answerOptions.map(({id, label, data}) => {
 
           /**
-           * Показать зеленым, если это правильный ответ.
-           * Показать красным, если этот ответ был выбран и он неправильный.
+           * Показать вариант ответа зеленым, если это правильный ответ.
+           * Показать вариант ответа красным, если этот ответ был выбран и он неправильный.
            */
           const intent = id === correctAnswerId 
             ? "success" 
@@ -61,7 +61,7 @@ const AnsweredQuestionView: React.FC<AnsweredQuestionViewProps> = ({
               ? "danger" 
               : undefined;
 
-          return <Tag className="mr-1" intent={intent}>
+          return <Tag key={id} className="mr-1" intent={intent}>
             <WordingView wording={label} data={data}/>
           </Tag>
         })}

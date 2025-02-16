@@ -1,13 +1,14 @@
 import { Card, Spinner } from "@blueprintjs/core";
-import { DataLoadConfig, DataLoadMenuProps, SupportedDataConfigs } from './types';
+import { DataLoadConfig, DataLoadMenuProps } from './types';
 import TechList from "../TechList";
 import { useEffect } from "react";
 import useDispatch from "../../../../../hooks/useDispatch";
 import { generateStartingQuestions, loadDataAction } from "../../../../../reducer/actions";
 import useDataFetch from "../../../hooks/useDataFetch";
+import { SupportedDataConfigs } from "../../../../../reducer/constants";
 
 /**
- * Меню загрузки данных для квиза
+ * Меню загрузки данных из указанного источника
  */
 const DataLoadMenu: React.FC<DataLoadMenuProps> = ({
   config,

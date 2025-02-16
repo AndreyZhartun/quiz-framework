@@ -1,3 +1,5 @@
+import { SupportedDataConfigs } from "../../../../../reducer/constants";
+
 export type DataLoadMenuProps = {
   config: SupportedDataConfigs;
 }
@@ -7,8 +9,4 @@ export type DataLoadConfig = {
   techs: string[];
   linkHref: string;
   linkLabel: string;
-}
-
-export enum SupportedDataConfigs {
-  Geography = "GEOGRAPHY",
 }

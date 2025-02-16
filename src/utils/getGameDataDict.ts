@@ -8,6 +8,14 @@ const getGameDataDict = (
   const dataDict: GameDataDictionary<Country> = new Map();
 
   rawData.forEach(item => {
+
+    /**
+     * Помещать в справочник только записи без пустых полей
+     */
+    if (!item.name || !item.capital) {
+      return;
+    }
+
     dataDict.set(item.code, item);
   })
 

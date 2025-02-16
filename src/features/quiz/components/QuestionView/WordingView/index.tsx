@@ -3,6 +3,7 @@ import { WordingViewProps } from './types'
 
 /**
  * Отображение формулировки
+ * @see Wording - тип "формулировка"
  */
 const WordingView: React.FC<WordingViewProps> = ({
   wording,

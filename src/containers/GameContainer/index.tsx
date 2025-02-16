@@ -22,16 +22,25 @@ const GameContainer: React.FC = () => {
   } = state;
 
   switch (status) {
+    /**
+     * Состояние перед началом игры
+     */
     case GameStatuses.Initial:
       return <>
         <MainMenu/>
         <StartGameButton/>
       </>
+    /**
+     * Состояние в процессе игры
+     */
     case GameStatuses.Ongoing:
       return <>
         <ProgressMenu/>
         <GameInProgress/>
       </>
+    /**
+     * Состояние после окончания игры
+     */
     case GameStatuses.Finished:
       return <>
         <ResultsView/>

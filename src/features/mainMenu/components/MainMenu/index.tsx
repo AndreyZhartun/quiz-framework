@@ -9,7 +9,9 @@ const usedTechs = [
 ]
 
 /**
- * Главное меню
+ * Главное меню.
+ * Предполагается, что в этом меню можно выбирать квиз из списка.
+ * @see SupportedDataConfigs - поддерживаемые квизы
  */
 const MainMenu: React.FC = () => {
   return <Section title={"Квиз-Фреймворк"} className="mr-2 mb-2">

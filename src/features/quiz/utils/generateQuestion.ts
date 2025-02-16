@@ -1,56 +1,72 @@
-import { GameDataDictionary } from "../../../reducer/constants";
+import { GameDataDictionary, SupportedDataConfigs } from "../../../reducer/constants";
 import getRandomInteger from "../../../utils/getRandomNumber";
 import getUUID from "../../../utils/getUUID";
 import shuffleArray from "../../../utils/shuffleArray";
 import Question, { AnswerOption } from "../models/Question";
 import { QUESTION_ANSWER_OPTION_COUNT } from '../../../constants/globalConstants';
-import Country from '../models/Country';
-import { allTopics, answerOptionWordings, questionWordings } from "./wordings";
+import wordingsDict from "./wordings/wordingsDict";
+
+export type GenerateQuestionParams = {
+  config: SupportedDataConfigs;
+  dataDict: GameDataDictionary<Record<string, string>>;
+}
 
 /**
- * Создать вопрос на основе справочника стран
+ * Создать вопрос на основе конфигурации и справочника
  */
-const generateQuestion = (
-  dataDict: GameDataDictionary<Country>,
-): Question => {
+const generateQuestion = ({
+  config,
+  dataDict,
+}: GenerateQuestionParams): Question => {
+
+  /**
+   * Определить типы вопросов и формулировки вопросов/вариантов ответа
+   */
+  const {
+    topics,
+    questionWordings,
+    answerOptionWordings,
+  } = wordingsDict[config];
 
   /**
    * Случайно определить тему вопроса
    */
-  const topic = allTopics[getRandomInteger(allTopics.length - 1)];
+  const topic = topics[getRandomInteger(topics.length - 1)];
 
   /**
-   * Перемешанный массив кодов стран
+   * Перемешанный массив ключей.
+   * Чтобы выбрать варианты ответов для вопроса, массив ключей перемешивается
+   * и из него выбирается N элементов с начала массива, где N - количество вариантов ответа.
    */
-  const shuffledCodes = shuffleArray([...dataDict.keys()]);
+  const shuffledKeys = shuffleArray([...dataDict.keys()]);
 
   /**
-   * Коды стран, которые будут представлены в опциях ответов
+   * Ключи, которые будут представлены в опциях ответов
    */
-  const optionCodes = shuffledCodes.slice(0, QUESTION_ANSWER_OPTION_COUNT);
+  const optionKeys = shuffledKeys.slice(0, QUESTION_ANSWER_OPTION_COUNT);
 
   /**
    * Случайно определить, какой из выбранных ответов будет правильным
    */
-  const correctAnswerCode = optionCodes[getRandomInteger(optionCodes.length - 1)];
+  const correctAnswerKey = optionKeys[getRandomInteger(optionKeys.length - 1)];
 
   /**
    * ID правильного ответа
    */
-  const correctOptionId = getUUID();
+  const correctAnswerId = getUUID();
 
   /**
    * Опции ответов
    */
-  const answerOptions: AnswerOption[] = optionCodes.map(code => {
+  const answerOptions: AnswerOption[] = optionKeys.map(key => {
 
-    const country = dataDict.get(code);
+    const keyValue = dataDict.get(key);
 
     return ({
-      id: code === correctAnswerCode ? correctOptionId : getUUID(),
+      id: key === correctAnswerKey ? correctAnswerId : getUUID(),
       label: answerOptionWordings[topic],
-      /** data для code всегда будет существовать, потому что code берется напрямую из ключей dataDict */
-      data: country as Country,
+      /** data для key всегда будет существовать, потому что key берется напрямую из ключей dataDict */
+      data: keyValue as Record<string, string>,
     });
   })
 
@@ -58,7 +74,7 @@ const generateQuestion = (
     id: getUUID(),
     title: questionWordings[topic],
     answerOptions,
-    correctAnswerId: correctOptionId,
+    correctAnswerId,
   }
 }
 

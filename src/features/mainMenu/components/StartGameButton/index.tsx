@@ -27,9 +27,7 @@ const StartGameButton = () => {
 
   const buttonProps = useMemo<CardProps>(() => {
     if (!canStart) {
-      return {
-        
-      }
+      return {}
     }
 
     return {
