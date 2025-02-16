@@ -6,6 +6,8 @@ import useDispatch from "../../../../../hooks/useDispatch";
 import { generateStartingQuestions, loadDataAction } from "../../../../../reducer/actions";
 import useDataFetch from "../../../hooks/useDataFetch";
 import { SupportedDataConfigs } from "../../../../../reducer/constants";
+import styles from "./DataLoadMenu.module.scss";
+import classNames from "classnames";
 
 /**
  * Меню загрузки данных из указанного источника
@@ -45,9 +47,9 @@ const DataLoadMenu: React.FC<DataLoadMenuProps> = ({
   return <Card compact className="d-flex justify-content-between">
     <div>
       <h3 className="mb-1">{title}</h3>
-      <div className="d-flex mb-3">
+      <div className={classNames("mb-3", styles['desc'])}>
         <TechList techs={techs}/>
-        <a href={linkHref} target="_blank" rel="noopener" className="ml-1">
+        <a href={linkHref} target="_blank" rel="noopener" className="mt-1 mt-xs-0 ml-0 ml-xs-1">
           {linkLabel}
         </a>
       </div>

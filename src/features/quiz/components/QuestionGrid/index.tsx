@@ -4,6 +4,8 @@ import styles from "./QuestionGrid.module.scss";
 import { Tag, TagProps } from '@blueprintjs/core';
 import { QuestionGridProps, QuestionGridTile, QuestionGridTileType } from './types';
 import { GameStatuses } from '../../../../reducer/constants';
+import useMobileDetector from '../../../../hooks/useMobileDetector';
+import classNames from 'classnames';
 
 /**
  * Сетка вопросов, показывает прошлый, текущий и будущие вопросы
@@ -64,20 +66,25 @@ const QuestionGrid: React.FC<QuestionGridProps> = ({
     return output;
   }, [status, answeredQuestions, current, queue]);
   
+  /**
+   * На мобильных не показывать иконки, чтобы номера вопросов всегда были видны
+   */
+  const isMobile = useMobileDetector();
+
   return (
     <div className={styles["grid"]}>
       {tiles.map(({id, type}, index) => {
         return <Tag 
           key={id}
-          large 
-          icon={tileIcons[type]} 
+          large
+          icon={isMobile ? undefined : tileIcons[type]} 
           intent={type} 
           onClick={onClick ? () => onClick(id) : undefined}
           interactive={!!onClick}
           minimal
           active={id === activeId}
-          className={styles["grid-card"]}>
-          <div className={styles["grid-card-text"]}>{index + 1}</div>
+          className={classNames(styles["grid-card"])}>
+          <div className={classNames(isMobile && "d-flex justify-content-center")}>{index + 1}</div>
         </Tag>
       })}
     </div>

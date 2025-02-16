@@ -1,0 +1,13 @@
+@import "/src/assets/styles/variables.scss";
+
+.desc {
+  display: flex;
+  align-items: center;
+}
+
+@media (max-width: map-get($breakpoints, "xs")) {
+  .desc {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
