@@ -1,5 +1,6 @@
 import { Tag } from "@blueprintjs/core"
 import { TechListProps } from "./types"
+import { memo } from "react"
 
 /**
  * Список тэгов с используемыми технологиями
@@ -13,4 +14,4 @@ const TechList: React.FC<TechListProps> = ({
   </div>
 )
 
-export default TechList
+export default memo(TechList);

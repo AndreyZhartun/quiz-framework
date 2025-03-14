@@ -1,7 +1,7 @@
 import { Card, Spinner } from "@blueprintjs/core";
 import { DataLoadConfig, DataLoadMenuProps } from './types';
 import TechList from "../TechList";
-import { useEffect } from "react";
+import { memo, useEffect } from "react";
 import useDispatch from "../../../../../hooks/useDispatch";
 import { generateStartingQuestions, loadDataAction } from "../../../../../reducer/actions";
 import useDataFetch from "../../../hooks/useDataFetch";
@@ -72,4 +72,4 @@ const dataConfigs: Record<SupportedDataConfigs, DataLoadConfig> = {
   }
 }
 
-export default DataLoadMenu;
+export default memo(DataLoadMenu);

@@ -1,6 +1,6 @@
 import { Callout } from "@blueprintjs/core";
 import styles from "./QuestionView.module.scss";
-import { useContext } from "react";
+import { memo, useContext } from "react";
 import GameContext from "../../../../context/gameContext";
 import QuestionViewHeader from "./QuestionViewHeader";
 import QuestionAnswerOptionView from "./QuestionAnswerOptionView";
@@ -39,4 +39,4 @@ const QuestionView: React.FC = () => {
   </>
 }
 
-export default QuestionView;
+export default memo(QuestionView);

@@ -1,4 +1,4 @@
-import { useContext } from 'react'
+import { memo, useContext } from 'react'
 import GameContext from '../../../../../context/gameContext';
 import { Card } from '@blueprintjs/core';
 import WordingView from '../WordingView';
@@ -28,4 +28,4 @@ const QuestionViewHeader = () => {
 </div>
 }
 
-export default QuestionViewHeader
+export default memo(QuestionViewHeader);

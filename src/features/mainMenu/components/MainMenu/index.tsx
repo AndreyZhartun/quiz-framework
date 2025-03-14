@@ -1,6 +1,7 @@
 import { Section, SectionCard } from "@blueprintjs/core";
 import GeoQuizMenu from "./GeoQuizMenu";
 import TechList from "./TechList";
+import { memo } from "react";
 
 const usedTechs = [
   "React",
@@ -23,4 +24,4 @@ const MainMenu: React.FC = () => {
   </Section>
 }
 
-export default MainMenu;
+export default memo(MainMenu);

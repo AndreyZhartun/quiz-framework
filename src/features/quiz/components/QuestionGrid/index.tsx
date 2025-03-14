@@ -1,4 +1,4 @@
-import { useContext, useMemo } from 'react'
+import { memo, useContext, useMemo } from 'react'
 import GameContext from '../../../../context/gameContext';
 import styles from "./QuestionGrid.module.scss";
 import { Tag, TagProps } from '@blueprintjs/core';
@@ -105,4 +105,4 @@ const tileIcons: Record<QuestionGridTileType, TagProps["icon"]> = {
   none: "small-minus",
 }
 
-export default QuestionGrid;
+export default memo(QuestionGrid);

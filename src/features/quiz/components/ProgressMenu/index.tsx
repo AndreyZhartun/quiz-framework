@@ -1,5 +1,6 @@
 import { Section, SectionCard } from "@blueprintjs/core";
 import QuestionGrid from "../QuestionGrid";
+import { memo } from "react";
 
 /**
  * Прогресс квиза
@@ -15,4 +16,4 @@ const ProgressMenu = () => {
   )
 }
 
-export default ProgressMenu
+export default memo(ProgressMenu)

@@ -1,5 +1,5 @@
 import { Section, SectionCard } from "@blueprintjs/core"
-import { useState } from "react";
+import { memo, useState } from "react";
 import QuestionGrid from "../../../quiz/components/QuestionGrid";
 import AnsweredQuestionView from "./AnsweredQuestionView";
 
@@ -26,4 +26,4 @@ const ResultsView = () => {
   )
 }
 
-export default ResultsView
+export default memo(ResultsView)

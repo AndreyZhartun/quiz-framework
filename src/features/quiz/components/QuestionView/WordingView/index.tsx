@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import { WordingViewProps } from './types'
 
 /**
@@ -25,4 +25,4 @@ const WordingView: React.FC<WordingViewProps> = ({
   
 }
 
-export default WordingView
+export default memo(WordingView);

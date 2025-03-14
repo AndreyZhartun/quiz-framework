@@ -1,4 +1,4 @@
-import React, { useContext, useMemo } from 'react'
+import React, { memo, useContext, useMemo } from 'react'
 import { AnsweredQuestionViewProps } from './types'
 import GameContext from '../../../../../context/gameContext';
 import { Card, Tag } from '@blueprintjs/core';
@@ -70,4 +70,4 @@ const AnsweredQuestionView: React.FC<AnsweredQuestionViewProps> = ({
   )
 }
 
-export default AnsweredQuestionView
+export default memo(AnsweredQuestionView)

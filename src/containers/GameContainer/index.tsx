@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { memo, useContext } from "react";
 import GameInProgress from "../../features/quiz/components/GameInProgress";
 import MainMenu from "../../features/mainMenu/components/MainMenu";
 import GameContext from "../../context/gameContext";
@@ -54,4 +54,4 @@ const GameContainer: React.FC = () => {
   }
 }
 
-export default GameContainer;
+export default memo(GameContainer);

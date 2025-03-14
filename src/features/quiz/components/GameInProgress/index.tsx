@@ -1,3 +1,4 @@
+import { memo } from "react";
 import QuestionView from "../QuestionView";
 import GameErrorBoundary from "./GameErrorBoundary";
 
@@ -10,4 +11,4 @@ const GameInProgress: React.FC = () => {
   </GameErrorBoundary>
 }
 
-export default GameInProgress;
+export default memo(GameInProgress);

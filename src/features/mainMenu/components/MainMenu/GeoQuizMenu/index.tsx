@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { SupportedDataConfigs } from "../../../../../reducer/constants";
 import DataLoadMenu from "../DataLoadMenu";
 
@@ -11,4 +12,4 @@ const GeoQuizMenu: React.FC = () => {
   />
 }
 
-export default GeoQuizMenu;
+export default memo(GeoQuizMenu);

@@ -1,3 +1,4 @@
+import { memo } from "react";
 import GameContainer from "../../containers/GameContainer";
 import styles from "./Layout.module.scss";
 
@@ -10,4 +11,4 @@ const Layout: React.FC = () => {
   </div>
 }
 
-export default Layout;
+export default memo(Layout);

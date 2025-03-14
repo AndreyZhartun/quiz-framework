@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react'
+import React, { memo, useCallback } from 'react'
 import { processAnswerAction } from '../../../../../reducer/actions';
 import useDispatch from '../../../../../hooks/useDispatch';
 import { QuestionAnswerOptionViewProps } from './types';
@@ -32,4 +32,4 @@ const QuestionAnswerOptionView: React.FC<QuestionAnswerOptionViewProps> = ({
   </Card>
 }
 
-export default QuestionAnswerOptionView
+export default memo(QuestionAnswerOptionView);
