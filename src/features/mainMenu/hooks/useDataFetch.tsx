@@ -1,5 +1,6 @@
 import { SupportedDataConfigs } from "../../../reducer/constants";
 import { useEffect, useState } from "react";
+import fetchData, { FetchDataParams } from "../utils/fetchData";
 
 /**
  * Хук для получения данных по шаблону
@@ -7,7 +8,6 @@ import { useEffect, useState } from "react";
 const useDataFetch = (config: SupportedDataConfigs) => {
 
   const {
-    endpoint,
     params,
     processResponse,
   } = dataFetchConfigs[config];
@@ -17,12 +17,11 @@ const useDataFetch = (config: SupportedDataConfigs) => {
   const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
-    setLoading(true)
+    setLoading(true);
 
-    fetch(endpoint, params)
-      .then(res => res.json())
-      .then(res => {
-        setData(processResponse(res));
+    fetchData(params)
+      .then(({data}) => {
+        setData(processResponse(data));
         setLoading(false);
       })  
       .catch((err: unknown) => {
@@ -30,7 +29,7 @@ const useDataFetch = (config: SupportedDataConfigs) => {
         setError(String(err));
         setLoading(false);
       })
-  }, [endpoint, params, processResponse])
+  }, [params, processResponse])
 
   return {
     data,
@@ -43,8 +42,7 @@ const useDataFetch = (config: SupportedDataConfigs) => {
  * Параметры для получения данных
  */
 type FetchParams = {
-  endpoint: string;
-  params: RequestInit;
+  params: FetchDataParams;
   processResponse: (response: any) => Record<string, string>[],
 }
 
@@ -53,14 +51,15 @@ type FetchParams = {
  */
 const dataFetchConfigs: Record<SupportedDataConfigs, FetchParams> = {
   [SupportedDataConfigs.Geography]: {
-    endpoint: "https://countries.trevorblades.com",
     params: {
+      endpoint: "https://countries.trevorblades.com",
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ query: '{ countries { code, name, capital, emoji } }' }),
+      data: {
+        query: '{ countries { code, name, capital, emoji } }'
+      },
     },
     processResponse: response => {
-
+      
       if (!response?.data?.countries) {
         return [];
       }
