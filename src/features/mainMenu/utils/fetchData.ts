@@ -8,7 +8,7 @@ export type FetchDataParams = {
 >>
 
 /**
- * Метод для запроса через axios
+ * axios wrapper
  */
 const fetchData = <T>({
   endpoint,

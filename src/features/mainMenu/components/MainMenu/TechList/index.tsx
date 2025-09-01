@@ -3,7 +3,7 @@ import { TechListProps } from "./types"
 import { memo } from "react"
 
 /**
- * Список тэгов с используемыми технологиями
+ * Used techs list
  */
 const TechList: React.FC<TechListProps> = ({
   techs,

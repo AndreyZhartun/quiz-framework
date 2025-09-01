@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
-
-const MOBILE_THRESHOLD = 768;
+import { MOBILE_THRESHOLD } from "../constants/breakpoints";
 
 /**
- * Хук для определения, показывается ли интерфейс на мобильных
+ * Hook to determine if the screen size is mobile
  */
 const useMobileDetector = () => {
 

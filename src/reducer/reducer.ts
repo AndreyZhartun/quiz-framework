@@ -7,15 +7,15 @@ import { GameDataDictionary, GameStatuses, QuizActionTypes, SupportedDataConfigs
 
 export type QuizState = {
   config: SupportedDataConfigs;
-  /** данные, по которым составляются вопросы, в форме справочника */
+  /** data from which questions are compiled, in the form of a dict */
   dataDict: GameDataDictionary<Record<string, string>>;
-  /** статус игры */
+  /** game status */
   status: GameStatuses;
-  /** текущий вопрос */
+  /** current question */
   current: Question | null;
-  /** очередь следующих вопросов */
+  /** queue of next questions */
   queue: Question[];
-  /** список вопросов, на которые был дан ответ */
+  /** list of questions that have been answered */
   answeredQuestions: AnsweredQuestion[];
 }
 
@@ -47,7 +47,7 @@ export const initialState: QuizState = {
 }
 
 /**
- * Главный и единственный обработчик изменений глобального состояния
+ * The main and only handler for global state changes
  */
 function quizReducer(
   state: QuizState,
@@ -55,7 +55,7 @@ function quizReducer(
 ): QuizState {
   switch (action.type) {
     /**
-     * Загрузить данные в состояние reducer-а
+     * Load data into the reducer state
      */
     case QuizActionTypes.LoadData:
       return {
@@ -66,7 +66,7 @@ function quizReducer(
         }),
       }
     /**
-     * Создать начальные вопросы
+     * Create initial questions
      */
     case QuizActionTypes.GenerateStartingQuestions: {
 
@@ -85,7 +85,7 @@ function quizReducer(
       }
     }
     /**
-     * Начать игру
+     * Start the game
      */
     case QuizActionTypes.StartGame:
       return {
@@ -93,7 +93,7 @@ function quizReducer(
         status: GameStatuses.Ongoing,
       }
     /**
-     * Записать ответ пользователя на вопрос
+     * Record user's answer
      */
     case QuizActionTypes.RecordAnswer:
 
@@ -112,12 +112,12 @@ function quizReducer(
         ]
       }
     /**
-     * Обработать изменение текущего вопроса
+     * Process current question status change
      */
     case QuizActionTypes.ProcessQuestionChange: {
 
       /**
-       * Завершить игру, если количество отвеченных вопросов достигло лимита
+       * End the game if the number of answered questions reaches the limit
        */
       if (state.answeredQuestions.length === GAME_QUESTION_LIMIT) {
         return {
@@ -128,16 +128,16 @@ function quizReducer(
       }
 
       /**
-       * Если в очереди нет вопросов, но игра еще не завершена, то показать ошибку в консоли,
-       * потому что такое состояние не должно возникать
+       * If there are no questions in the queue, but the game is not finished yet, then show an error in the console,
+       * because this state should not occur
        */
       if (!state.queue.length) {
-        console.error("В очереди вопросов пусто, но игра еще не завершена");
+        console.error("Error: The question queue is empty, but the game is not over yet");
         return state;
       }
 
       /**
-       * Нужно ли добавлять новые вопросы в очередь
+       * true if new questions should be added to the queue
        */
       const shouldRefillQueue = state.answeredQuestions.length + state.queue.length < GAME_QUESTION_LIMIT;
 

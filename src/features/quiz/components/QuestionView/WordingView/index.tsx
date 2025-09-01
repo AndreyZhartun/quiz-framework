@@ -2,8 +2,8 @@ import React, { memo } from 'react'
 import { WordingViewProps } from './types'
 
 /**
- * Отображение формулировки
- * @see Wording - тип "формулировка"
+ * Wording constructor
+ * @see Wording - wording type
  */
 const WordingView: React.FC<WordingViewProps> = ({
   wording,
@@ -18,7 +18,7 @@ const WordingView: React.FC<WordingViewProps> = ({
         case "field": 
           return <React.Fragment key={index}>{String(data[content]) || "-"}</React.Fragment>
         default:
-          return <React.Fragment key={index}>{"{Неизвестный фрагмент}"}</React.Fragment>
+          return <React.Fragment key={index}>{"{Error: unknown fragment}"}</React.Fragment>
       }
     })}
   </>

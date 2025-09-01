@@ -20,7 +20,7 @@ const getGameDataDict = <T extends Record<string, string>>({
   rawData.forEach(item => {
 
     /**
-     * Помещать в справочник только записи без пустых полей
+     * Put only records without empty fields
      */
     if (!requiredKeys?.every(key => item[key])) {
       return;
@@ -33,14 +33,17 @@ const getGameDataDict = <T extends Record<string, string>>({
 }
 
 type DictFillParams = {
-  /** поле ключа Map */
+  /** Map key field */
   mainKey: string;
-  /** необходимые для вопросов поля */
+  /** 
+   * Keys required for the question wording
+   * If the data object doesn't have those keys a different data object would be chosen.
+   */
   requiredKeys?: string[];
 }
 
 /**
- * Настройки заполнения справочника для различных конфигураций
+ * Dict filling settings for different configurations
  */
 const dataDictFillConfigs: Record<SupportedDataConfigs, DictFillParams> = {
   [SupportedDataConfigs.Geography]: {

@@ -3,7 +3,7 @@ import QuestionView from "../QuestionView";
 import GameErrorBoundary from "./GameErrorBoundary";
 
 /**
- * Контейнер игры в процессе
+ * Ongoing game container
  */
 const GameInProgress: React.FC = () => {
   return <GameErrorBoundary>

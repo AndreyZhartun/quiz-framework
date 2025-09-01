@@ -8,7 +8,8 @@ export type GameContextType = {
 }
 
 /**
- * Контекст, содержащий всё глобальное состояние игры и функцию действия
+ * A context containing all the global game state and an action function
+ * @see App - redux context imitation
  */
 const GameContext = createContext<GameContextType>({
   state: initialState,

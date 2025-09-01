@@ -4,7 +4,7 @@ import QuestionGrid from "../../../quiz/components/QuestionGrid";
 import AnsweredQuestionView from "./AnsweredQuestionView";
 
 /**
- * Отображение результатов
+ * Displays the results if the quiz
  */
 const ResultsView = () => {
 
@@ -12,9 +12,9 @@ const ResultsView = () => {
   
   return (
     <>
-      <Section title={"Квиз закончен"}>
+      <Section title={"The end"}>
         <SectionCard>
-          <div className="mb-2">Нажмите на номер вопроса, чтобы узнать подробности</div>
+          <div className="mb-2">Click on the question number to see the details of the question and answer</div>
           <QuestionGrid
             onClick={setActiveId}
             activeId={activeId}

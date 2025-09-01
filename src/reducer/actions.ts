@@ -3,7 +3,7 @@ import { QuizAction } from "./reducer";
 import { QuizActionTypes } from "./constants";
 
 /**
- * Тип действия reducer-а с middleware (по аналогии с redux-thunk)
+ * Reducer action type with middleware (similar to redux-thunk)
  */
 export type MiddlewareLikeAction = (dispatch: React.Dispatch<QuizAction>) => void;
 

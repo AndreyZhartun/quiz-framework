@@ -5,7 +5,7 @@
   row-gap: 8px;
 
   &-card {
-    // фикс для firefox-а
+    // firefox fix
     &:active, &:focus {
       outline: none;
     }

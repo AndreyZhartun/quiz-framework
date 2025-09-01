@@ -1,8 +1,8 @@
 
 /**
- * Формулировка.
- * С помощью этой модели можно точно описать фразу вопроса или ответа.
- * @see geographyWordings - примеры формулировок для квиза по географии
+ * Wording.
+ * This model can be used to accurately describe the natural language phrase of a question or answer.
+ * @see geographyWordings - examples of wordings for a geography quiz
  */
 type Wording = WordingItem[];
 

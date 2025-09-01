@@ -2,8 +2,8 @@ import { useContext } from "react";
 import GameContext from "../context/gameContext";
 
 /**
- * Хук useDispatch, как в Redux.
- * Работает только внутри контекста GameContext.
+ * useDispatch hook, like in Redux.
+ * Only works within the GameContext context.
  */
 const useDispatch = () => {
 

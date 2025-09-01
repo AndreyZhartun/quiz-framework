@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import fetchData, { FetchDataParams } from "../utils/fetchData";
 
 /**
- * Хук для получения данных по шаблону
+ * Hook for getting data according to a config
  */
 const useDataFetch = (config: SupportedDataConfigs) => {
 
@@ -39,7 +39,7 @@ const useDataFetch = (config: SupportedDataConfigs) => {
 }
 
 /**
- * Параметры для получения данных
+ * Parameters for fetching data
  */
 type FetchParams = {
   params: FetchDataParams;
@@ -47,7 +47,7 @@ type FetchParams = {
 }
 
 /**
- * Для каждого поддерживаемого источника можно указать параметры для запроса данных
+ * For each supported source, you can specify configs for requesting data.
  */
 const dataFetchConfigs: Record<SupportedDataConfigs, FetchParams> = {
   [SupportedDataConfigs.Geography]: {

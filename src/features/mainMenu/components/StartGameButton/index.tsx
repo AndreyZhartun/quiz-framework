@@ -5,7 +5,7 @@ import { Card, CardProps } from "@blueprintjs/core";
 import useDispatch from "../../../../hooks/useDispatch";
 
 /**
- * Кнопка начала игры
+ * Button to start the game
  */
 const StartGameButton = () => {
 
@@ -38,7 +38,7 @@ const StartGameButton = () => {
 
   return <>
     <Card {...buttonProps}>
-      Начать игру
+      Start the game
     </Card>
   </>
 }

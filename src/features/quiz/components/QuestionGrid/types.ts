@@ -11,13 +11,13 @@ export type QuestionGridTile = {
 }
 
 /**
- * Тип тайла, показывающий статус вопроса.
- * Используется тип Intent напрямую из типов blueprint, чтобы не создавать лишние мапперы
+ * Tile type showing the status of the question.
+ * The Intent type is used directly from the BlueprintJS types to avoid creating extra mappers
  */
 export type QuestionGridTileType = Extract<
   Intent, 
-  'success' // правильный ответ на вопрос
-  | 'danger' // неправильный ответ на вопрос
-  | 'primary' // текущий вопрос
-  | 'none' // будущий вопрос
+  'success' // correct answer to question
+  | 'danger' // incorrect answer to question
+  | 'primary' // current question
+  | 'none' // future question
 >;

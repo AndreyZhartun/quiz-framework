@@ -10,7 +10,7 @@ import styles from "./DataLoadMenu.module.scss";
 import classNames from "classnames";
 
 /**
- * Меню загрузки данных из указанного источника
+ * Menu for loading data from the specified source
  */
 const DataLoadMenu: React.FC<DataLoadMenuProps> = ({
   config,
@@ -41,7 +41,7 @@ const DataLoadMenu: React.FC<DataLoadMenuProps> = ({
   } = dataConfigs[config];
 
   if (error) { 
-    return <p>Ошибка: {error}</p>
+    return <p>Error: {error}</p>
   }
 
   return <Card compact className="d-flex justify-content-between">
@@ -55,7 +55,7 @@ const DataLoadMenu: React.FC<DataLoadMenuProps> = ({
       </div>
       {!error && (
         <div className="text-secondary">
-          {loading ? "Загрузка..." : "Выбран по умолчанию"}
+          {loading ? "Loading..." : "Chosen by default"}
         </div>
       )}
     </div>
@@ -65,7 +65,7 @@ const DataLoadMenu: React.FC<DataLoadMenuProps> = ({
 
 const dataConfigs: Record<SupportedDataConfigs, DataLoadConfig> = {
   [SupportedDataConfigs.Geography]: {
-    title: "Квиз на знание географии",
+    title: "Geography quiz",
     techs: ["GraphQL"],
     linkHref: "https://github.com/trevorblades/countries",
     linkLabel: "github.com/trevorblades/countries",

@@ -3,7 +3,7 @@ import { SupportedDataConfigs } from "../../../../../reducer/constants";
 import DataLoadMenu from "../DataLoadMenu";
 
 /**
- * Меню выбора квиза по географии
+ * Geography Quiz selection menu
  */
 const GeoQuizMenu: React.FC = () => {
 

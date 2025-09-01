@@ -3,7 +3,7 @@ import GameContainer from "../../containers/GameContainer";
 import styles from "./Layout.module.scss";
 
 /**
- * Каркас вёрстки приложения
+ * The layout that wraps the app
  */
 const Layout: React.FC = () => {
   return <div className={styles['layout']}>

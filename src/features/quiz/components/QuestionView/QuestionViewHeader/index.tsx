@@ -4,7 +4,7 @@ import { Card } from '@blueprintjs/core';
 import WordingView from '../WordingView';
 
 /**
- * Заголовок вопроса с формулировкой самого вопроса
+ * The title of the question with the wording of the question itself
  */
 const QuestionViewHeader = () => {
 
@@ -18,7 +18,7 @@ const QuestionViewHeader = () => {
 
   if (!current || !correctAnswerCountry) {
 
-    throw new Error("Ошибка заголовка вопроса");
+    throw new Error("Question title error");
   }
   
   return <div className="d-flex mb-2">

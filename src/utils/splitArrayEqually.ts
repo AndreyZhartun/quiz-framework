@@ -1,5 +1,5 @@
 /**
- * Поделить массив на равные части длиной splitLength и вернуть массив этих частей
+ * Divide an array into equal parts of length=splitLength and return an array of these parts
  */
 function splitArrayEqually<T>(
   array: T[],

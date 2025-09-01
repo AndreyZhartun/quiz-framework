@@ -6,7 +6,7 @@ import QuestionViewHeader from "./QuestionViewHeader";
 import QuestionAnswerOptionView from "./QuestionAnswerOptionView";
 
 /**
- * Отображение текущего вопроса с вариантами ответов
+ * Display the current question with answer options
  */
 const QuestionView: React.FC = () => {
 
@@ -18,7 +18,7 @@ const QuestionView: React.FC = () => {
 
   if (!current) {
     return <Callout intent="danger">
-      Ошибка загрузки вопроса
+      Error loading question
     </Callout>
   }
 

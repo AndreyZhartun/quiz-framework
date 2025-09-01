@@ -3,7 +3,7 @@ import { GameErrorBoundaryProps as Props, GameErrorBoundaryState as State } from
 import { Callout } from "@blueprintjs/core";
 
 /**
- * Граничный компонент для обработки ошибок игрового процесса
+ * Boundary component for handling gameplay errors
  */
 class GameErrorBoundary extends React.Component<Props, State> {
 
@@ -18,12 +18,12 @@ class GameErrorBoundary extends React.Component<Props, State> {
   }
 
   public componentDidCatch(error: Error, errorInfo: ErrorInfo) {
-    console.error("Ошибка в игре:", error, errorInfo);
+    console.error("Game error:", error, errorInfo);
   }
 
   render() {
     if (this.state.hasError) {
-      return <Callout intent="danger">Возникла ошибка. Пожалуйста, перезагрузите страницу</Callout>
+      return <Callout intent="danger">An error has occurred. Please reload the page.</Callout>
     }
 
     return this.props.children;

@@ -4,7 +4,7 @@ import Wording from '../../models/Wording';
 import geographyWordings from './geographyWordings';
 
 /**
- * Для каждого источника данных свои параметры тем и формулировок вопросов
+ * Each data source has its own parameters for topics and question wording.
  */
 const wordingsDict: Record<SupportedDataConfigs, WordingsRecord<string>> = {
   [SupportedDataConfigs.Geography]: geographyWordings,

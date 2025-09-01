@@ -1,5 +1,5 @@
 /**
- * Получить случайное целое число от 0 до max
+ * Get random int 0 - max
  */
 const getRandomInteger = (max: number) => {
   const randomFloat = Math.random() * max;

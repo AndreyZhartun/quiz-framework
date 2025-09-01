@@ -12,7 +12,7 @@ export type GenerateQuestionParams = {
 }
 
 /**
- * Создать вопрос на основе конфигурации и справочника
+ * Create a question based on configuration and reference
  */
 const generateQuestion = ({
   config,
@@ -20,7 +20,7 @@ const generateQuestion = ({
 }: GenerateQuestionParams): Question => {
 
   /**
-   * Определить типы вопросов и формулировки вопросов/вариантов ответа
+   * Get question types and question/answer options wording
    */
   const {
     topics,
@@ -29,35 +29,27 @@ const generateQuestion = ({
   } = wordingsDict[config];
 
   /**
-   * Случайно определить тему вопроса
+   * Topic is random for each question
    */
   const topic = topics[getRandomInteger(topics.length - 1)];
 
-  /**
-   * Перемешанный массив ключей.
-   * Чтобы выбрать варианты ответов для вопроса, массив ключей перемешивается
-   * и из него выбирается N элементов с начала массива, где N - количество вариантов ответа.
-   */
   const shuffledKeys = shuffleArray([...dataDict.keys()]);
 
   /**
-   * Ключи, которые будут представлены в опциях ответов
+   * Keys that will be displayed as the answer options
    */
   const optionKeys = shuffledKeys.slice(0, QUESTION_ANSWER_OPTION_COUNT);
 
   /**
-   * Случайно определить, какой из выбранных ответов будет правильным
+   * Randomly determine the correct answer
    */
   const correctAnswerKey = optionKeys[getRandomInteger(optionKeys.length - 1)];
 
   /**
-   * ID правильного ответа
+   * Generate ID for the correct answer
    */
   const correctAnswerId = getUUID();
 
-  /**
-   * Опции ответов
-   */
   const answerOptions: AnswerOption[] = optionKeys.map(key => {
 
     const keyValue = dataDict.get(key);
@@ -65,7 +57,7 @@ const generateQuestion = ({
     return ({
       id: key === correctAnswerKey ? correctAnswerId : getUUID(),
       label: answerOptionWordings[topic],
-      /** data для key всегда будет существовать, потому что key берется напрямую из ключей dataDict */
+      /** data for key will always exist because key is taken directly from the dataDict keys */
       data: keyValue as Record<string, string>,
     });
   })

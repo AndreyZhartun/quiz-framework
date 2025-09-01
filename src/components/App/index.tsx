@@ -7,15 +7,12 @@ import GameContext, { GameContextType } from '../../context/gameContext';
 function App() {
 
   /**
-   * Для управления состояниями игры нужно хранить много различных переменных.
-   * Так что используется встроенный в React reducer
+   * Built-in reducer to manage complex state
    */
   const [state, pureDispatch] = useReducer(quizReducer, initialState)
 
   /**
-   * Чтобы не прописывать type в действии каждый раз, можно создать набор функций, 
-   * которые и будут генерировать действия reducer-а при их вызове.
-   * По сути здесь имитируется принцип Redux middleware (как в redux-thunk).
+   * As an experiment, I tried to implement basic Redux middleware (like redux-thunk) using only built-in state tools
    */
   const dispatch = useCallback((action: MiddlewareLikeAction) => {
     action(pureDispatch);

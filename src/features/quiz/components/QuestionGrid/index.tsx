@@ -8,7 +8,7 @@ import useMobileDetector from '../../../../hooks/useMobileDetector';
 import classNames from 'classnames';
 
 /**
- * Сетка вопросов, показывает прошлый, текущий и будущие вопросы
+ * Question grid, shows past, current and future questions
  */
 const QuestionGrid: React.FC<QuestionGridProps> = ({
   onClick,
@@ -25,24 +25,27 @@ const QuestionGrid: React.FC<QuestionGridProps> = ({
   } = useContext(GameContext);
 
   /**
-   * Тайлы сетки
+   * Grid tiles
    */
   const tiles = useMemo<QuestionGridTile[]>(() => {
 
+    /**
+     * Answered questions output
+     */
     const output: QuestionGridTile[] = answeredQuestions.map(({question, givenAnswerId}) => ({
       id: question.id,
       type: givenAnswerId === question.correctAnswerId ? "success" : "danger",
     }));
 
     /**
-     * Если игра не в процессе, то больше нет ничего, что можно показать
+     * If the game is not in progress, then there is nothing else to show.
      */
     if (status !== GameStatuses.Ongoing) {
       return output;
     }
 
     /**
-     * Текущий вопрос
+     * Current question
      */
     if (current) {
       output.push({
@@ -52,7 +55,7 @@ const QuestionGrid: React.FC<QuestionGridProps> = ({
     }
 
     /**
-     * Будущие вопросы из очереди
+     * Future questions from the queue
      */
     if (queue.length) {
       output.push(
@@ -67,7 +70,7 @@ const QuestionGrid: React.FC<QuestionGridProps> = ({
   }, [status, answeredQuestions, current, queue]);
   
   /**
-   * На мобильных не показывать иконки, чтобы номера вопросов всегда были видны
+   * Hide icons on mobile so that question numbers are always visible.
    */
   const isMobile = useMobileDetector();
 
@@ -96,7 +99,7 @@ const QuestionGrid: React.FC<QuestionGridProps> = ({
 }
 
 /**
- * Иконки для различных типов тайлов
+ * Icons for different types of tiles
  */
 const tileIcons: Record<QuestionGridTileType, TagProps["icon"]> = {
   success: "small-tick",

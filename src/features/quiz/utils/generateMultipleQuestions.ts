@@ -7,7 +7,7 @@ type GenerateMultipleQuestionsParams = {
 }
 
 /**
- * Создать несколько вопросов
+ * Create multiple questions
  */
 const generateMultipleQuestions = ({
   count,

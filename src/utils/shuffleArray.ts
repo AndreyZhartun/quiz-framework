@@ -1,5 +1,6 @@
 /*
- * Перемешать массив, используя алгоритм Дурштенфельда
+ * Shuffle an array (Fisher–Yates shuffle).
+ * The array of keys is shuffled and N elements are selected from the beginning of the array, where N is the number of needed elements.
  */
 function shuffleArray<T>(array: T[]): T[] {
 

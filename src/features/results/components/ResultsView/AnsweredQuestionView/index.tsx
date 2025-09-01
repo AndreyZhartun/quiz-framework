@@ -1,11 +1,11 @@
 import React, { memo, useContext, useMemo } from 'react'
 import { AnsweredQuestionViewProps } from './types'
 import GameContext from '../../../../../context/gameContext';
-import { Card, Tag } from '@blueprintjs/core';
+import { Card, Tag, TagProps } from '@blueprintjs/core';
 import WordingView from '../../../../quiz/components/QuestionView/WordingView';
 
 /**
- * Подробное отображение вопроса, на который был дан ответ
+ * Detailed display of the answered question
  */
 const AnsweredQuestionView: React.FC<AnsweredQuestionViewProps> = ({
   id,
@@ -39,7 +39,7 @@ const AnsweredQuestionView: React.FC<AnsweredQuestionViewProps> = ({
     ?.data;
 
   if (!correctAnswerCountry) {
-    throw new Error("Ошибка заголовка вопроса");
+    throw new Error("Question title error");
   }
 
   return (
@@ -52,16 +52,11 @@ const AnsweredQuestionView: React.FC<AnsweredQuestionViewProps> = ({
         {answerOptions.map(({id, label, data}) => {
 
           /**
-           * Показать вариант ответа зеленым, если это правильный ответ.
-           * Показать вариант ответа красным, если этот ответ был выбран и он неправильный.
+           * Green for correct, red for wrong
            */
-          const intent = id === correctAnswerId 
-            ? "success" 
-            : id == givenAnswerId 
-              ? "danger" 
-              : undefined;
+          const intent = getAnsweredQuestionTagIntent({id, correctAnswerId, givenAnswerId});
 
-          return <Tag key={id} className="mr-1" intent={intent}>
+          return <Tag key={id} className="mr-1" intent={intent || undefined}>
             <WordingView wording={label} data={data}/>
           </Tag>
         })}
@@ -69,5 +64,27 @@ const AnsweredQuestionView: React.FC<AnsweredQuestionViewProps> = ({
     </Card>
   )
 }
+
+type GetAnsweredQuestionTagIntentParams = {
+  id: string;
+  correctAnswerId: string;
+  givenAnswerId: string;
+}
+
+const getAnsweredQuestionTagIntent = ({
+  id,
+  correctAnswerId,
+  givenAnswerId,
+}: GetAnsweredQuestionTagIntentParams): TagProps['intent'] | null => {
+  if (id === correctAnswerId) {
+    return "success";
+  }
+
+  if (id === givenAnswerId) {
+    return "danger";
+  }
+
+  return null;
+};
 
 export default memo(AnsweredQuestionView)

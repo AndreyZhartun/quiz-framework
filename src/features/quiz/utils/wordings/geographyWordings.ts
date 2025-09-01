@@ -2,16 +2,14 @@ import Wording from "../../models/Wording";
 import { WordingsRecord } from "./wordingsDict";
 
 /**
- * Типы вопросов, которые могут быть заданы в квизе по георграфии
+ * This file contains all logic for the construction of natural language sentences.
+ * These are the types of questions that may be asked in a geography quiz
  */
 enum GeographyQuestionTopics {
   CapitalToCountry = "CAPITAL_TO_COUNTRY",
   CountryToCapital = "COUNTRY_TO_CAPITAL",
 }
 
-/**
- * Массив со всеми типами
- */
 const allTopics: GeographyQuestionTopics[] = [
   GeographyQuestionTopics.CapitalToCountry,
   GeographyQuestionTopics.CountryToCapital,
@@ -20,22 +18,32 @@ const allTopics: GeographyQuestionTopics[] = [
 type TopicWordings = Record<GeographyQuestionTopics, Wording>;
 
 /**
- * Формулировки вопросов для каждого типа вопроса
+ * Question wording for each question type
+ * (for each question a wording is randomly selected from this)
  */
 const questionWordings: TopicWordings = {
+  /**
+   * Question would be worded like this:
+   * {capital_name} is the capital of which country?
+   */
   [GeographyQuestionTopics.CapitalToCountry]: [
     {type: 'field', content: 'capital'},
-    {type: 'raw', content: ' - столица какой страны?'},
+    {type: 'raw', content: ' is the capital of which country?'},
   ],
+  /**
+   * Question would be worded like this:
+   * What city is the capital of the country {country_name}?
+   */
   [GeographyQuestionTopics.CountryToCapital]: [
-    {type: 'raw', content: 'Какой город является столицей страны '},
+    {type: 'raw', content: 'What city is the capital of the country '},
     {type: 'field', content: 'name'},
     {type: 'raw', content: '?'}
   ],
 }
 
 /**
- * Формулировки вариантов ответа для каждого типа вопроса
+ * Wording of answer options for each question type/wording
+ * @see questionWordings above
  */
 const answerOptionWordings: TopicWordings = {
   [GeographyQuestionTopics.CapitalToCountry]: [
@@ -47,7 +55,7 @@ const answerOptionWordings: TopicWordings = {
 }
 
 /**
- * Параметры формулировок для квиза по географии
+ * All wording parameters for the geography quiz
  */
 const geographyWordings: WordingsRecord<GeographyQuestionTopics> = {
   topics: allTopics,

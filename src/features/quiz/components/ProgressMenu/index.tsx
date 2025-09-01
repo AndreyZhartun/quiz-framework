@@ -3,12 +3,12 @@ import QuestionGrid from "../QuestionGrid";
 import { memo } from "react";
 
 /**
- * Прогресс квиза
+ * Quiz progress
  */
 const ProgressMenu = () => {
   
   return (
-    <Section title="Игра в процессе" className="mb-2">
+    <Section title="Game in progress" className="mb-2">
       <SectionCard>
         <QuestionGrid/>
       </SectionCard>

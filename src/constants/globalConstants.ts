@@ -1,14 +1,14 @@
 /**
- * Общее количество вопросов в игре
+ * Total number of questions in the game
  */
 export const GAME_QUESTION_LIMIT = 20;
 
 /**
- * Количество вопросов в одном уровне
+ * Number of questions in one level
  */
 export const GAME_LEVEL_QUESTION_LIMIT = 5;
 
 /**
- * Количество вариантов ответа в вопросе
+ * Number of answer options in a question
  */
 export const QUESTION_ANSWER_OPTION_COUNT = 2;

@@ -6,7 +6,7 @@ import WordingView from '../WordingView';
 import { Card } from '@blueprintjs/core';
 
 /**
- * Отображение варианта ответа на вопрос
+ * Displaying the answer option for a question
  */
 const QuestionAnswerOptionView: React.FC<QuestionAnswerOptionViewProps> = ({
   answerOption: {

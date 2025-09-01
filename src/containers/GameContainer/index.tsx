@@ -9,7 +9,7 @@ import { Callout } from "@blueprintjs/core";
 import ResultsView from "../../features/results/components/ResultsView";
 
 /**
- * Контейнер-обертка всех состояний игры
+ * A wrapper container for all game states
  */
 const GameContainer: React.FC = () => {
 
@@ -23,7 +23,7 @@ const GameContainer: React.FC = () => {
 
   switch (status) {
     /**
-     * Состояние перед началом игры
+     * Before game start
      */
     case GameStatuses.Initial:
       return <>
@@ -31,7 +31,7 @@ const GameContainer: React.FC = () => {
         <StartGameButton/>
       </>
     /**
-     * Состояние в процессе игры
+     * Ongoing game
      */
     case GameStatuses.Ongoing:
       return <>
@@ -39,7 +39,7 @@ const GameContainer: React.FC = () => {
         <GameInProgress/>
       </>
     /**
-     * Состояние после окончания игры
+     * After game end
      */
     case GameStatuses.Finished:
       return <>
@@ -48,7 +48,7 @@ const GameContainer: React.FC = () => {
     default:
       return <>
         <Callout intent="danger">
-          Неизвестная ошибка
+          Unknown game status
         </Callout>
       </>
   }
