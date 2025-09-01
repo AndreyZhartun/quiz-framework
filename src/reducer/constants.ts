@@ -1,5 +1,5 @@
 /**
- * Типы действий reducer-а
+ * Reducer action types
  */
 export enum QuizActionTypes {
   LoadData = "LOAD_DATA",
@@ -11,7 +11,7 @@ export enum QuizActionTypes {
 }
 
 /**
- * Статусы игры
+ * Game statuses
  */
 export enum GameStatuses {
   Initial = "INITIAL",
@@ -20,7 +20,7 @@ export enum GameStatuses {
 }
 
 /**
- * Поддерживаемые источники данных для квиза
+ * Supported data sources
  */
 export enum SupportedDataConfigs {
   Geography = "GEOGRAPHY",
